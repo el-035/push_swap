@@ -1,10 +1,9 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-//all stuff to include
 # include "libft/libft.h"
-
-//all structs
+# include <stdlib.h>
+#include <stdio.h> //delete
 
 typedef struct s_stack
 {
@@ -12,6 +11,9 @@ typedef struct s_stack
     struct s_stack	*next;
 }					t_stack;
 
-//all prototypes
+
+
+//utils
+int	atoi_ps(const char *str);
 
 #endif
