@@ -6,6 +6,7 @@
 //
 
 #include"push_swap.h"
+
 void	check_duplicates(char **input)
 {
 	int	i;
@@ -18,20 +19,44 @@ void	check_duplicates(char **input)
 		while (input[j])
 		{
 			if (atoi_ps(input[i]) == atoi_ps(input[j]))
-			{
-				printf("Error\n");
-				exit(1);
-			}
+				error();
 			j++;
 		}
 		i++;
 	}
 }
-
-int main(int argc, char **argv)
+t_stack	*allocate_stack_a(char **input)
 {
-	if (argc <= 1)
-		return (0);		//must not display anything and give the prompt back.
+	t_stack	*first;
+	t_stack	*stack;
+	int		i;
 
+	i = 1;
+	first = new(atoi_ps(input[i++]), 'a');
+	if (!first)
+		return NULL;	//error and free
+	stack =  new_last(first, atoi_ps(input[i++]), 'a');
+	if (!stack)
+		return NULL;	//error and free
+	first->next = stack;
+	while(input[i])
+	{
+		stack->next = new_last(stack, atoi_ps(input[i++]), 'a');
+		if (!stack->next)
+			return NULL;	//error and free
+		stack = stack->next;
+	}
+	stack->next = first;
+	return (first);
+}
+
+int	main(int argc, char **argv)
+{
+	t_stack	*first_a;
+
+	if (argc <= 2)	//???
+		return (0);
 	check_duplicates(argv);
+	first_a = allocate_stack_a(argv);
+
 }

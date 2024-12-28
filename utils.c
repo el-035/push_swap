@@ -3,8 +3,8 @@
 int	atoi_ps(const char *str)
 {
 	int				i;
-	long long	result;
-	long long	n;
+	long long		result;
+	long long		n;
 
 	n = 1;
 	i = 0;
@@ -24,9 +24,6 @@ int	atoi_ps(const char *str)
 	}
 	result = result * n;
 	if (result < -2147483648 || result > 2147483647)
-	{
-		printf("Error\n");		//ft_printf
-		exit (1);
-	}
+		error();
 	return ((int) result);
 }
