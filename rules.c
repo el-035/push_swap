@@ -19,4 +19,29 @@ rrb (reverse rotate b): Shift down all elements of stack b by 1.
 	The last element becomes the first one.
 rrr : rra and rrb at the same time. 
 */
+#include "push_swap.h"
 
+void	swap(t_stack *first)
+{
+	int	temp;
+
+	if (!first || !first->next)
+		return ;
+	temp = first->data;
+	first->data = first->next->data;
+	first->next->data = temp;
+}
+void	push
+t_stack	*rotate(t_stack *first)
+{
+	if (!first || !first->next)
+		return (first);
+	return (first->next);
+}
+
+t_stack	*rev_rot(t_stack *first)
+{
+	if (!first || !first->next)
+		return (first);
+	return (first->previous);
+}

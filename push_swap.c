@@ -49,7 +49,19 @@ t_stack	*allocate_stack_a(char **input)
 	stack->next = first;
 	return (first);
 }
+void	test_print(t_stack *first)
+{
+	t_stack *temp;
 
+	temp = first;
+	printf(" A\n");
+	while(temp->next != first)
+	{
+		printf("%d\n", temp->data);
+		temp = temp->next;
+	}
+	printf("%d\n", temp->data);
+}
 int	main(int argc, char **argv)
 {
 	t_stack	*first_a;
@@ -58,5 +70,12 @@ int	main(int argc, char **argv)
 		return (0);
 	check_duplicates(argv);
 	first_a = allocate_stack_a(argv);
-
+	test_print (first_a);
+	swap(first_a);
+	test_print (first_a);
+	first_a = rotate(first_a);
+	test_print (first_a);
+	first_a = rev_rot(first_a);
+	swap(first_a);
+	test_print (first_a);
 }

@@ -25,6 +25,11 @@ int	atoi_ps(const char *str);
 t_stack	*new(int data, char stack);
 t_stack	*new_last(t_stack *prev, int data, char stack);
 
+//rules
+void	swap(t_stack *first);
+t_stack	*rotate(t_stack *first);
+t_stack	*rev_rot(t_stack *first);
+
 //error + free
 void	error();
 
