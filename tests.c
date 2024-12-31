@@ -5,10 +5,11 @@ void	test_print(t_stack *first)
 
 	temp = first;
 	printf(" A\n");
-	while(temp->next != first)
+	while(temp->next && temp->next != first)
 	{
 		printf("%d\n", temp->data);
 		temp = temp->next;
 	}
-	printf("%d\n", temp->data);
+	if(temp)
+		printf("%d\n", temp->data);
 }

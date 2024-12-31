@@ -31,7 +31,38 @@ void	swap(t_stack *first)
 	first->data = first->next->data;
 	first->next->data = temp;
 }
-void	push
+
+void	push(t_stack **from, t_stack **to)
+{
+	char	stack;
+	t_stack	*temp;
+	t_stack *last;
+
+	stack = 'a';
+	if (!from || !*from)
+		return ;
+	if ((*from)->stack == 'a')
+		stack = 'b';
+	if (!*to)
+	{
+		*to = new((*from)->data, stack);
+		if (!*to)
+			return ;		//Error
+	}
+	else
+	{
+		*to = new_first(to, (*from)->data, stack);
+		if (!to)
+			return ;		//error
+	}
+	temp = *from;
+	last = (*from)->previous;
+	(*from) = (*from)->next;
+	(*from)->previous = last;
+	last->next = (*from);
+	free(temp);
+}
+
 t_stack	*rotate(t_stack *first)
 {
 	if (!first || !first->next)
