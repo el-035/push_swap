@@ -89,7 +89,7 @@ void test_print(t_stack *stack, const char *name)
     printf("Stack %s:\n", name);
     if (!stack)
     {
-        printf("  [Empty]\n");
+        printf("  [Empty]\n\n");
         return;
     }
 
@@ -100,9 +100,43 @@ void test_print(t_stack *stack, const char *name)
                count++, current->data, current->stack,
                (void *)current->previous, (void *)current->next);
         current = current->next;
-    } while (current && current != stack);
+    } while (current && current->data != stack->data);
 
     printf("\n");
+}
+void	move(char *move, t_stack **first_a, t_stack **first_b)
+{
+	if (move == "sa")
+		swap(*first_a);
+	else if (move == "sb")
+		swap(*first_b);
+	else if (move == "ss")
+	{
+		swap(*first_a);
+		swap(*first_b);
+	}
+	else if (move == "pa")
+		push(first_a, first_b);
+	else if (move == "pb")
+		push(first_b, first_a);
+	else if (move == "ra")
+		rotate(*first_a);
+	else if (move == "rb")
+		rotate(*first_b);
+	else if (move == "rr")
+	{
+		rotate(*first_a);
+		rotate(*first_b);
+	}
+	else if (move == "rra")
+		rev_rot(*first_a);
+	else if (move == "rrb")
+		rev_rot(*first_b);
+	else if (move == "rrr")
+	{
+		rev_rot(*first_a);
+		rev_rot(*first_b);
+	}
 }
 int	main(int argc, char **argv)
 {
@@ -118,9 +152,10 @@ int	main(int argc, char **argv)
 
 	test_print(first_a, "a");
 	test_print(first_b, "b");
-	//first_a = first_a->next;
-	push(&first_a/* ->previous */, &first_b);
-	//first_a = temp;
+	push(&first_a, &first_b);
+	push(&first_a, &first_b);
+	swap(first_a);
+	swap(first_b);
 	test_print(first_a, "a");
 	test_print(first_b, "b");
 }

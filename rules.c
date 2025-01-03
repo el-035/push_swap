@@ -36,7 +36,6 @@ void	push(t_stack **from, t_stack **to)
 {
 	char	stack;
 	t_stack	*temp;
-	t_stack *last;
 
 	stack = 'a';
 	if (!from || !*from)
@@ -56,10 +55,9 @@ void	push(t_stack **from, t_stack **to)
 			return ;		//error
 	}
 	temp = *from;
-	last = (*from)->previous;
 	(*from) = (*from)->next;
-	(*from)->previous = last;
-	last->next = (*from);
+	(*from)->previous = temp->previous;
+	temp->previous->next = (*from);
 	free(temp);
 }
 

@@ -31,15 +31,27 @@ t_stack	*new_last(t_stack *prev, int data, char stack)
 t_stack	*new_first(t_stack **first, int data, char stack)
 {
 	t_stack	*add;
+	t_stack *last;
 
 	add = (t_stack *) malloc(sizeof(t_stack));
 	if (!add)
 		return NULL;
-	if (!first)
 	add->data = data;
 	add->stack = stack;
-	add->previous = (*first)->previous;
-	(*first)->previous = add;
-	add->next = (*first);
+	if (*first && !(*first)->next)
+	{
+		add->previous = (*first);
+		add->next = (*first);
+		(*first)->next = add;
+		(*first)->previous = add;
+	}
+	else		//nothing makes sense here
+	{
+		last = (*first)->previous;
+		add->previous = (*first)->previous;
+		add->next = (*first);
+		(*first)->previous = add;
+		last->next = add;
+	}
 	return (add);
 }
