@@ -104,40 +104,7 @@ void test_print(t_stack *stack, const char *name)
 
     printf("\n");
 }
-void	move(char *move, t_stack **first_a, t_stack **first_b)
-{
-	if (move == "sa")
-		swap(*first_a);
-	else if (move == "sb")
-		swap(*first_b);
-	else if (move == "ss")
-	{
-		swap(*first_a);
-		swap(*first_b);
-	}
-	else if (move == "pa")
-		push(first_a, first_b);
-	else if (move == "pb")
-		push(first_b, first_a);
-	else if (move == "ra")
-		rotate(*first_a);
-	else if (move == "rb")
-		rotate(*first_b);
-	else if (move == "rr")
-	{
-		rotate(*first_a);
-		rotate(*first_b);
-	}
-	else if (move == "rra")
-		rev_rot(*first_a);
-	else if (move == "rrb")
-		rev_rot(*first_b);
-	else if (move == "rrr")
-	{
-		rev_rot(*first_a);
-		rev_rot(*first_b);
-	}
-}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*first_a;
@@ -151,11 +118,14 @@ int	main(int argc, char **argv)
 	first_b = NULL;
 
 	test_print(first_a, "a");
-	test_print(first_b, "b");
+/* 	test_print(first_b, "b");
 	push(&first_a, &first_b);
 	push(&first_a, &first_b);
 	swap(first_a);
-	swap(first_b);
+	swap(first_b); */
+	//moves("sa", &first_a, &first_b);
+	moves("pb", &first_a, &first_b);
+	//moves("rr", &first_a, &first_b);
 	test_print(first_a, "a");
 	test_print(first_b, "b");
 }
