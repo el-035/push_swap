@@ -24,7 +24,7 @@ int	atoi_ps(const char *str)
 	}
 	result = result * n;
 	if (result < -2147483648 || result > 2147483647)
-		error();
+		error(NULL, NULL);
 	return ((int) result);
 }
 

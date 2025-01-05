@@ -41,6 +41,7 @@ void	r(char *move, t_stack **first_a, t_stack **first_b);
 void	moves(char *move, t_stack **first_a, t_stack **first_b);
 
 //error + free
-void	error();
+void	error(t_stack **first_a, t_stack **first_b);
+void	free_stack(t_stack	**stack);
 
 #endif
