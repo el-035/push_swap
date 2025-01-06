@@ -10,7 +10,7 @@ void	error(t_stack **first_a, t_stack **first_b)
 	exit(1);
 }
 
-void	free_stack(t_stack	**stack) // JUST NO
+/* void	free_stack(t_stack	**stack)
 {
 	int		n;
 	t_stack	*current;
@@ -30,6 +30,26 @@ void	free_stack(t_stack	**stack) // JUST NO
 	{
 		current = current->next;
 		free(current->previous);
+	}
+	free(*stack);
+	*stack = NULL;
+} */
+void	free_stack(t_stack	**stack)
+{
+	int		n;
+	t_stack	*current;
+
+	if (!*stack)
+		return ;
+	if ((*stack)->next)
+	{
+		n = (*stack)->data;
+		current = (*stack)->next;
+		while (current->data != n)
+		{
+			current = current->next;
+			free(current->previous);
+		}
 	}
 	free(*stack);
 	*stack = NULL;

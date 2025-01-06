@@ -1,30 +1,4 @@
-//check input
-	//no duplicates
-	//int
-//add data to the node
-//rules
-//
-
 #include"push_swap.h"
-
-void	check_duplicates(char **input)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while(input[i])
-	{
-		j = i + 1;
-		while (input[j])
-		{
-			if (atoi_ps(input[i]) == atoi_ps(input[j]))
-				error(NULL, NULL);
-			j++;
-		}
-		i++;
-	}
-}
 
 t_stack	*allocate_stack_a(char **input)
 {
@@ -55,7 +29,7 @@ t_stack	*allocate_stack_a(char **input)
 	return (first);
 }
 
-void test_print_combined(t_stack *stack_a, t_stack *stack_b)
+/* void test_print_combined(t_stack *stack_a, t_stack *stack_b)
 {
     t_stack *current_a = stack_a;
     t_stack *current_b = stack_b;
@@ -87,7 +61,7 @@ void test_print_combined(t_stack *stack_a, t_stack *stack_b)
         printf("\n");
     }
     printf("\n");
-}
+} */
 
 int	main(int argc, char **argv)
 {
@@ -99,7 +73,7 @@ int	main(int argc, char **argv)
 	check_duplicates(argv);
 	first_a = allocate_stack_a(argv);
 	first_b = NULL;
-	
+	algorithm(&first_a, &first_b);
 	free_stack(&first_a);
 	free_stack(&first_b);
 }

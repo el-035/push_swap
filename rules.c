@@ -22,7 +22,7 @@ void	push(t_stack **from, t_stack **to)
 	if ((*from)->stack == 'a')
 		stack = 'b';
 	*to = new_first(to, (*from)->data, stack);
-	if (!to)
+	if (!*to)
 		error(from, to);
 	temp = *from;
 	if (!(*from)->next)
@@ -36,6 +36,7 @@ void	push(t_stack **from, t_stack **to)
 		(*from)->previous = NULL;
 	}
 	free(temp);
+	temp = NULL;
 }
 
 t_stack	*rotate(t_stack *first)

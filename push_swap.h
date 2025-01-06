@@ -15,13 +15,14 @@ typedef struct s_stack
 }					t_stack;
 
 //main
-void	check_duplicates(char **input);
 t_stack	*allocate_stack_a(char **input);
 
 //utils
-int	atoi_ps(const char *str);
-int	is_sorted(t_stack *first);
-int	ft_strcmp(char *s1, char *s2);
+void	check_duplicates(char **input);
+int		atoi_ps(const char *str);
+int		is_sorted(t_stack *first);
+int		is_rev_sorted(t_stack *first);
+int		ft_strcmp(char *s1, char *s2);
 
 //struct_utils
 t_stack	*new(int data, char stack);
@@ -39,6 +40,10 @@ void	s(char *move, t_stack **first_a, t_stack **first_b);
 void	p(char *move, t_stack **first_a, t_stack **first_b);
 void	r(char *move, t_stack **first_a, t_stack **first_b);
 void	moves(char *move, t_stack **first_a, t_stack **first_b);
+
+//algorithm
+t_stack	*algorithm(t_stack **first_a, t_stack **first_b);
+int		biggest(t_stack	*first);
 
 //error + free
 void	error(t_stack **first_a, t_stack **first_b);

@@ -1,7 +1,7 @@
 CC = cc
 
 CFILES = push_swap.c utils.c struct_utils.c error.c rules.c \
-	moves.c
+	moves.c algorithm.c
 		
 FT_PRINTF_FILES = ft_printf/ft_printf.c ft_printf/ft_printmore.c ft_printf/ft_printstuff.c 
 LIBFT_DIR = libft
