@@ -55,3 +55,39 @@ t_stack	*new_first(t_stack **first, int data, char stack)
 	}
 	return (add);
 }
+int	stack_len(t_stack *first)
+{
+	int	nodes;
+	int	data;
+
+	if (!first)
+		return (0);	
+	nodes = 1;
+	if (!first->next)
+		return (nodes);
+	data = first->data;
+	first = first->next;
+	while (first->data != data)
+	{
+		nodes++;
+		first = first->next;
+	}
+	return (nodes);
+}
+
+int	find_smallest(t_stack *first) //protect if ther is less than 3n
+{
+	int	smallest;
+	int	start;
+
+	start = first->data;
+	smallest = first->data;
+	first = first->next;
+	while (first->data != start)
+	{
+		if (first->data < smallest)
+			smallest = first->data;
+		first = first->next;
+	}
+	return (smallest);
+}

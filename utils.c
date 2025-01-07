@@ -11,7 +11,7 @@ void	check_duplicates(char **input)
 		j = i + 1;
 		while (input[j])
 		{
-			if (atoi_ps(input[i]) == atoi_ps(input[j]))
+			if (atoi_ps(input[i]) == atoi_ps(input[j]))	//./push_swap 1 -1 0 2 3 4 6 7, gives error here
 				error(NULL, NULL);
 			j++;
 		}

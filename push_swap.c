@@ -1,5 +1,9 @@
 #include"push_swap.h"
 
+//./push_swap 1 -1 0 2 3 4 6 7 	why error
+//./push_swap 1 0 2 3 4 6 7		why error
+//./push_swap 1 -1 0 2 3 4 6 7
+
 t_stack	*allocate_stack_a(char **input)
 {
 	t_stack	*first;
@@ -29,7 +33,7 @@ t_stack	*allocate_stack_a(char **input)
 	return (first);
 }
 
-/* void test_print_combined(t_stack *stack_a, t_stack *stack_b)
+void test_print_combined(t_stack *stack_a, t_stack *stack_b)
 {
     t_stack *current_a = stack_a;
     t_stack *current_b = stack_b;
@@ -61,7 +65,7 @@ t_stack	*allocate_stack_a(char **input)
         printf("\n");
     }
     printf("\n");
-} */
+}
 
 int	main(int argc, char **argv)
 {
@@ -73,7 +77,9 @@ int	main(int argc, char **argv)
 	check_duplicates(argv);
 	first_a = allocate_stack_a(argv);
 	first_b = NULL;
-	algorithm(&first_a, &first_b);
+
+	three_five(&first_a, &first_b);
+	test_print_combined(first_a, first_b);
 	free_stack(&first_a);
 	free_stack(&first_b);
 }

@@ -1,5 +1,9 @@
 #include "push_swap.h"
 
+//./push_swap 1 -1 0 2 3 4 6 7 	why error
+//./push_swap 1 0 2 3 4 6 7		why error
+//./push_swap 1 -1 0 2 3 4 6 7
+
 void	error(t_stack **first_a, t_stack **first_b)
 {
 	ft_printf("Error\n");

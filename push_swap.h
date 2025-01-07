@@ -28,7 +28,8 @@ int		ft_strcmp(char *s1, char *s2);
 t_stack	*new(int data, char stack);
 t_stack	*new_last(t_stack *prev, int data, char stack);
 t_stack	*new_first(t_stack **first, int data, char stack);
-
+int	    stack_len(t_stack *first);
+int	    find_smallest(t_stack *first);
 //rules
 void	swap(t_stack *first);
 void	push(t_stack **from, t_stack **to);
@@ -39,11 +40,18 @@ t_stack	*rev_rot(t_stack *first);
 void	s(char *move, t_stack **first_a, t_stack **first_b);
 void	p(char *move, t_stack **first_a, t_stack **first_b);
 void	r(char *move, t_stack **first_a, t_stack **first_b);
+void	rr(char *move, t_stack **first_a, t_stack **first_b);
 void	moves(char *move, t_stack **first_a, t_stack **first_b);
 
 //algorithm
 t_stack	*algorithm(t_stack **first_a, t_stack **first_b);
 int		biggest(t_stack	*first);
+int	    up_down(t_stack *first);
+void	push_biggest_a(t_stack **first_a, t_stack **first_b);
+
+//three five
+void    three_five(t_stack **first_a, t_stack **first_b);
+void	sort_three(t_stack **first_a, t_stack **first_b);
 
 //error + free
 void	error(t_stack **first_a, t_stack **first_b);
