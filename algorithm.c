@@ -78,7 +78,6 @@ t_stack	*algorithm(t_stack **first_a, t_stack **first_b)
 	moves("pb", first_a, first_b);
 	while(*first_a != NULL && is_sorted(*first_b) == 0)
 	{
-		//here need function that finds the biggest among prev cur and next
 		if (biggest(*first_a) == 1)
 		{
 			if ((*first_b)->data > (*first_b)->next->data)
