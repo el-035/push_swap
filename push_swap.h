@@ -14,6 +14,9 @@ typedef struct s_stack
     struct s_stack	*next;
 }					t_stack;
 
+//TO DELETE
+void test_print_combined(t_stack *stack_a, t_stack *stack_b);
+
 //main
 t_stack	*allocate_stack_a(char **input);
 
@@ -48,7 +51,7 @@ t_stack	*algorithm(t_stack **first_a, t_stack **first_b);
 int		biggest(t_stack	*first);
 int	    up_down(t_stack *first);
 void	push_biggest_a(t_stack **first_a, t_stack **first_b);
-
+void	order_b(t_stack **first_a, t_stack **first_b);
 //three five
 void    three_five(t_stack **first_a, t_stack **first_b);
 void	sort_three(t_stack **first_a, t_stack **first_b);

@@ -77,10 +77,14 @@ int	main(int argc, char **argv)
 	check_duplicates(argv);
 	first_a = allocate_stack_a(argv);
 	first_b = NULL;
-
-	three_five(&first_a, &first_b);
-	test_print_combined(first_a, first_b);
-	free_stack(&first_a);
+	if (stack_len(first_a) <= 5)
+		three_five(&first_a, &first_b);
+	else
+		algorithm(&first_a, &first_b);
+	//test_print_combined(first_a, first_b);
+	if (is_sorted(first_b) == 1)
+		ft_printf("COOL");
+	free_stack(&first_a);	//if i free it then whats the point
 	free_stack(&first_b);
 }
 
