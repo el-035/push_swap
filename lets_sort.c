@@ -28,12 +28,35 @@ int	biggest_ss(t_stack *first_a, int smallest)
 	return (smallest);
 }
 
-/* void	initialise_ss(t_stack **first)
+void	initialise_ss(t_stack **first)
 {
-	static int	ss_count = 1;
-	
+	int		ss_count;
+	int		ss_max;
+	int		len;
 
-} */
+	ss_count = 1;
+	len = stack_len(*first);
+	ss_max = biggest_ss((*first), find_smallest(*first));
+	while (len-- > 0)
+	{
+		if ((*first)->data >= ss_max && (*first)->data <= find_smallest(*first))
+			(*first)->sub_stack = ss_count;
+		(*first) = (*first)->next;
+	}
+	while (ss_count <= stack_len(*first) / 10)
+	{
+		ss_count++;
+		len = stack_len(*first);
+		while (len-- > 0)
+		{
+			if ((*first)->data >= ss_max && (*first)->data <= find_smallest(*first))
+				(*first)->sub_stack = ss_count;
+			(*first) = (*first)->next;
+		}
+		
+	}
+
+}
 
 /* void	lets_sort(t_stack **first_a, t_stack **first_b)
 {
