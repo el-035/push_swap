@@ -10,6 +10,7 @@ typedef struct s_stack
 {
     int				data;
     char            stack;
+    int             sub_stack;
     struct s_stack  *previous;
     struct s_stack	*next;
 }					t_stack;
@@ -33,6 +34,7 @@ t_stack	*new_last(t_stack *prev, int data, char stack);
 t_stack	*new_first(t_stack **first, int data, char stack);
 int	    stack_len(t_stack *first);
 int	    find_smallest(t_stack *first);
+
 //rules
 void	swap(t_stack *first);
 void	push(t_stack **from, t_stack **to);
@@ -52,6 +54,12 @@ int		biggest(t_stack	*first);
 int	    up_down(t_stack *first);
 void	push_biggest_a(t_stack **first_a, t_stack **first_b);
 void	order_b(t_stack **first_a, t_stack **first_b);
+
+//lest sort
+int	    biggest_ss(t_stack *first_a, int smallest);
+void	initialise_ss(t_stack **first);
+void	lets_sort(t_stack **first_a, t_stack **first_b);
+
 //three five
 void    three_five(t_stack **first_a, t_stack **first_b);
 void	sort_three(t_stack **first_a, t_stack **first_b);

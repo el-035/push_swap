@@ -1,10 +1,49 @@
+#include"push_swap.h"
 
-//function to convert decimal to binary
+//find smallest already exists, lest see if it works
 
-//go through stack and add int containing binary
+int	biggest_ss(t_stack *first_a, int smallest)
+{
+	t_stack	*start;
+	int		next;
+	int		i;
+	int		len;
 
-//find biggest number and check how any digits the binary has, that is how many times the bitshifting will be done
+	i = 1;
+	start = first_a;
+	while(i < 10)
+	{
+		next = 2147483647;
+		first_a = start;
+		len = stack_len(first_a);
+		while (len-- > 0)
+		{
+			if (first_a->data < next && first_a->data > smallest)
+				next = first_a->data;
+			first_a = first_a->next;
+		}
+		smallest = next;
+		i++;
+	}
+	return (smallest);
+}
 
-//start with first a, if last digit is 0 push to b and so on and bitshif to get rid of that one bit
+/* void	initialise_ss(t_stack **first)
+{
+	static int	ss_count = 1;
+	
 
-//repeat process for both a and b, at the end a will be sorted??
+} */
+
+/* void	lets_sort(t_stack **first_a, t_stack **first_b)
+{
+	int	sub_stack;
+	int	nodes;
+	int	smallest;
+
+	nodes = stack_len(*first_a);
+	sub_stack = nodes / 10;
+	smallest = find_smallest(*first_a);
+	
+
+} */
