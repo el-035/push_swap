@@ -44,7 +44,6 @@ int	up_down(t_stack *first)
 	else
 		return (2); //closer to top, r
 	return (count);
-
 }
 void	push_biggest_a(t_stack **first_a, t_stack **first_b)
 {
