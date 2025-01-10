@@ -33,6 +33,29 @@ t_stack	*allocate_stack_a(char **input)
 	return (first);
 }
 
+void test_print(t_stack *stack, const char *name)
+{
+    t_stack *current;
+    int count = 1;
+
+    printf("Stack %s:\n", name);
+    if (!stack)
+    {
+        printf("  [Empty]\n\n");
+        return;
+    }
+
+    current = stack;
+    do
+    {//stack = %c, current = %p, previous = %p, next = %p
+        printf("  Node %d: data = %d, ss = %d\n",
+               count++, current->data, current->sub_stack/* current->stack, (void *)current,
+			   (void *)current->previous, (void *)current->next */);
+        current = current->next;
+    } while (current && current->data != stack->data);
+
+    printf("\n");
+}
 
 int	main(int argc, char **argv)
 {
@@ -46,11 +69,14 @@ int	main(int argc, char **argv)
 	first_b = NULL;
 	if (stack_len(first_a) <= 5)
 		three_five(&first_a, &first_b);
+	initialise_ss(&first_a);
+	test_print(first_a, "Stack A");
 	/* else
 		algorithm(&first_a, &first_b);
 	//test_print_combined(first_a, first_b);
 	if (is_sorted(first_b) == 1)
 		ft_printf("COOL"); */
+	//ft_printf("%d\n", biggest_ss(first_a, 1));
 	free_stack(&first_a);
 	free_stack(&first_b);
 }

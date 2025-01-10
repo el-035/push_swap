@@ -27,10 +27,10 @@ void test_print(t_stack *stack, const char *name)
 
     current = stack;
     do
-    {
-        printf("  Node %d: data = %d, stack = %c, current = %p, previous = %p, next = %p\n",
-               count++, current->data, current->stack, (void *)current,
-			   (void *)current->previous, (void *)current->next);
+    {//stack = %c, current = %p, previous = %p, next = %p
+        printf("  Node %d: data = %d, ss = %d\n",
+               count++, current->data, current->sub_stack/* current->stack, (void *)current,
+			   (void *)current->previous, (void *)current->next */);
         current = current->next;
     } while (current && current->data != stack->data);
 

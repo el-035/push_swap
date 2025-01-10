@@ -9,12 +9,12 @@ int	biggest_ss(t_stack *first_a, int smallest)
 	int		i;
 	int		len;
 
-	i = 1;
+	i = 0;
 	start = first_a;
 	while(i < 10)
 	{
-		next = 2147483647;
 		first_a = start;
+		next = find_max(first_a);
 		len = stack_len(first_a);
 		while (len-- > 0)
 		{
@@ -22,9 +22,12 @@ int	biggest_ss(t_stack *first_a, int smallest)
 				next = first_a->data;
 			first_a = first_a->next;
 		}
+		if (next == smallest)
+			i++;
 		smallest = next;
 		i++;
 	}
+	first_a = start;
 	return (smallest);
 }
 
@@ -33,40 +36,30 @@ void	initialise_ss(t_stack **first)
 	int		ss_count;
 	int		ss_max;
 	int		len;
+	int		min;
 
+	min = find_smallest(*first);
 	ss_count = 1;
-	len = stack_len(*first);
-	ss_max = biggest_ss((*first), find_smallest(*first));
-	while (len-- > 0)
+	ss_max = biggest_ss((*first), min);
+	ft_printf("%d\n", ss_max);
+	while (ss_count <= (stack_len(*first) / 10) + 1)
 	{
-		if ((*first)->data >= ss_max && (*first)->data <= find_smallest(*first))
-			(*first)->sub_stack = ss_count;
-		(*first) = (*first)->next;
-	}
-	while (ss_count <= stack_len(*first) / 10)
-	{
-		ss_count++;
 		len = stack_len(*first);
 		while (len-- > 0)
 		{
-			if ((*first)->data >= ss_max && (*first)->data <= find_smallest(*first))
+			if ((*first)->data <= ss_max && (*first)->data >= min)
 				(*first)->sub_stack = ss_count;
 			(*first) = (*first)->next;
 		}
-		
+		ss_count++;
+		min = ss_max;
+		ss_max = biggest_ss((*first), min);
+		ft_printf("%d\n", ss_max);
 	}
-
 }
 
-/* void	lets_sort(t_stack **first_a, t_stack **first_b)
+void	lets_sort(t_stack **first_a, t_stack **first_b)
 {
-	int	sub_stack;
-	int	nodes;
-	int	smallest;
+	initialise_ss(first_a);
 
-	nodes = stack_len(*first_a);
-	sub_stack = nodes / 10;
-	smallest = find_smallest(*first_a);
-	
-
-} */
+}

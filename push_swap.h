@@ -28,6 +28,9 @@ int		is_sorted(t_stack *first);
 int		is_rev_sorted(t_stack *first);
 int		ft_strcmp(char *s1, char *s2);
 
+//more
+int		find_max(t_stack *first);
+
 //struct_utils
 t_stack	*new(int data, char stack);
 t_stack	*new_last(t_stack *prev, int data, char stack);

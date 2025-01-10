@@ -1,7 +1,7 @@
 CC = cc
 
 CFILES = push_swap.c utils.c struct_utils.c error.c rules.c \
-	moves.c algorithm.c tree_five.c lets_sort.c
+	moves.c algorithm.c tree_five.c lets_sort.c more_utils.c
 		
 FT_PRINTF_FILES = ft_printf/ft_printf.c ft_printf/ft_printmore.c ft_printf/ft_printstuff.c 
 LIBFT_DIR = libft
@@ -13,7 +13,7 @@ OFILES = $(CFILES:.c=.o)
 
 FT_PRINTF_OFILES = $(FT_PRINTF_FILES:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g #-ggdb
+CFLAGS = -Wall -Wextra -Werror -g -ggdb
 
 FT_PRINTF = -I./ft_printf
 

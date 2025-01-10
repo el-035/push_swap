@@ -1,17 +1,18 @@
 #include "push_swap.h"
 
-void	max(t_stack *first_a)
+int	find_max(t_stack *first)
 {
-	
-}
+	int	max;
+	int	start;
 
-int	itb(int	data)
-{
-	int	result;
-
-	result = 0;
-	if (data > 1)
-		result = result * 
-	data = data % 2;
-	
+	start = first->data;
+	max = first->data;
+	first = first->next;
+	while (first->data != start)
+	{
+		if (first->data > max)
+			max = first->data;
+		first = first->next;
+	}
+	return (max);
 }
