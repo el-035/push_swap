@@ -69,11 +69,12 @@ int	main(int argc, char **argv)
 	first_b = NULL;
 	if (stack_len(first_a) <= 5)
 		three_five(&first_a, &first_b);
-	initialise_ss(&first_a);
-	test_print(first_a, "Stack A");
+	else
+		lets_sort(&first_a, &first_b);
+	test_print_combined(first_a, first_b);
+	//test_print(first_a, "Stack A");
 	/* else
 		algorithm(&first_a, &first_b);
-	//test_print_combined(first_a, first_b);
 	if (is_sorted(first_b) == 1)
 		ft_printf("COOL"); */
 	//ft_printf("%d\n", biggest_ss(first_a, 1));

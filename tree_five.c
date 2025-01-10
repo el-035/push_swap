@@ -45,6 +45,7 @@ void	push_smallest(t_stack **first_a, t_stack **first_b)
 	}
 	moves("pb", first_a, first_b);
 }
+
 void	sort_five(t_stack **first_a, t_stack **first_b, int len)
 {
 	if (len == 5)

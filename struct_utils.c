@@ -28,7 +28,7 @@ t_stack	*new_last(t_stack *prev, int data, char stack)
 	return (last);
 }
 
-t_stack	*new_first(t_stack **first, int data, char stack)
+t_stack	*new_first(t_stack **first, int data, char stack, int sub_stack)
 {
 	t_stack	*add;
 
@@ -39,6 +39,7 @@ t_stack	*new_first(t_stack **first, int data, char stack)
 		return NULL;
 	add->data = data;
 	add->stack = stack;
+	add->sub_stack = sub_stack;
 	if (*first && !(*first)->next)
 	{
 		add->previous = (*first);

@@ -11,6 +11,7 @@ typedef struct s_stack
     int				data;
     char            stack;
     int             sub_stack;
+	int				position;
     struct s_stack  *previous;
     struct s_stack	*next;
 }					t_stack;
@@ -34,7 +35,7 @@ int		find_max(t_stack *first);
 //struct_utils
 t_stack	*new(int data, char stack);
 t_stack	*new_last(t_stack *prev, int data, char stack);
-t_stack	*new_first(t_stack **first, int data, char stack);
+t_stack	*new_first(t_stack **first, int data, char stack, int sub_stack);
 int	    stack_len(t_stack *first);
 int	    find_smallest(t_stack *first);
 

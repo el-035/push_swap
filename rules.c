@@ -21,7 +21,7 @@ void	push(t_stack **from, t_stack **to)
 		return ;
 	if ((*from)->stack == 'a')
 		stack = 'b';
-	*to = new_first(to, (*from)->data, stack);
+	*to = new_first(to, (*from)->data, stack, (*from)->sub_stack);
 	if (!*to)
 		error(from, to);
 	temp = *from;
