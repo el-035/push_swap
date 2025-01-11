@@ -2,6 +2,7 @@
 
 //find smallest already exists, lest see if it works
 
+
 int	biggest_ss(t_stack *first_a, int smallest)
 {
 	t_stack	*start;
@@ -37,11 +38,15 @@ void	initialise_ss(t_stack **first)
 	int		ss_max;
 	int		len;
 	int		min;
+	int		tot_ss;
 
+	tot_ss = stack_len(*first) / 10;
+	if (stack_len(*first) % 10 != 0)
+		tot_ss = stack_len(*first) / 10 + 1;
 	min = find_smallest(*first);
 	ss_count = 1;
 	ss_max = biggest_ss((*first), min);
-	while (ss_count <= (stack_len(*first) / 10) + 1)
+	while (ss_count <= tot_ss)
 	{
 		len = stack_len(*first);
 		while (len-- > 0)
@@ -56,45 +61,169 @@ void	initialise_ss(t_stack **first)
 	}
 }
 
-//put position of 
+int	next_small(t_stack *first, int biggest)
+{
+	t_stack	*temp;
+	int		next;
+
+	temp = first;
+	next = find_smallest(first);
+	while (1)
+	{
+		if (first->data > next && first->data < biggest)
+			next = first->data;
+		first = first->next;
+		if (temp == first)
+			break ;
+	}
+	return (next);
+}
 
 void	initialise_position(t_stack **first)
 {
-	int	pos;
+	t_stack	*temp;
+	int		biggest;
+	int		pos;
 
+	temp = (*first);
+	biggest = find_max(*first);
+	pos = 1;
+	while (temp)
+	{
+		if (temp->data == biggest && biggest != find_smallest(temp))
+		{
+			temp->position = pos++;
+			biggest = next_small(*first, biggest);
+		}
+		if (biggest == find_smallest(temp) && temp->data == biggest)
+		{
+			temp->position = pos;
+			break ;
+		}
+		temp = temp->next;
+	}
 }
 
+void test_print(t_stack *stack, const char *name)
+{
+    t_stack *current;
+    int count = 1;
+
+    printf("Stack %s:\n", name);
+    if (!stack)
+    {
+        printf("  [Empty]\n\n");
+        return;
+    }
+
+    current = stack;
+    do
+    {//stack = %c, current = %p, previous = %p, next = %p
+        printf("  Node %d: data = %d, ss = %d, pos = %d\n",
+               count++, current->data, current->sub_stack, current->position/* current->stack, (void *)current,
+			   (void *)current->previous, (void *)current->next */);
+        current = current->next;
+    } while (current && current->data != stack->data);
+
+    printf("\n");
+}
 void	half_sort_b(t_stack **first_a, t_stack **first_b)
 {
-	int	i;
+	int	ss;
 	int	n;
 
-	initialise_ss(first_a);
-	i = 1;
+	ss = 1;
 	n = 0;
-	while (*first_a && first_a)
+	initialise_ss(first_a);
+	while (*first_a)
 	{
-		if ((*first_a)->sub_stack == i)
+		if ((*first_a)->sub_stack != ss && (*first_a)->next)
+			moves("ra", first_a, first_b);
+		else if ((*first_a)->sub_stack == ss)
 		{
 			moves("pb", first_a, first_b);
 			n++;
 		}
-		else
-			moves("ra", first_a, first_b);
 		if (n == 10)
 		{
 			n = 0;
-			i++;
+			ss++;
+		}
+	}
+	initialise_position(first_b);
+}
+int	up_or_down(t_stack *first, int pos)
+{
+	int	nodes;
+	int	count;
+
+	if (!first || !first->next || !first->previous)
+		return (-1);
+	nodes = stack_len(first);
+	count = 0;
+	while (count <= nodes)
+	{
+		if (first->position == pos)
+			break ;
+		first = first->next;
+		count++;
+	}
+	if (count < (nodes / 2))
+		return (1); // close to top
+	else
+		return (2);
+	return (0);
+}
+void	back_to_a(t_stack **first_a, t_stack **first_b)
+{
+	int	pos;
+	int max_pos;
+
+	test_print(*first_b, "B");
+	pos = 1;
+	max_pos = stack_len(*first_b);
+	while (pos == 2)
+	{
+		test_print(*first_b, "A");
+		if ((*first_b)->position == pos)
+		{
+			moves("pa", first_a, first_b);
+			pos++;
+		}
+		if((*first_b)->next->position == pos)
+		{
+			moves("sb", first_a, first_b);
+			moves("pa", first_a, first_b);
+			pos++;
+		}
+		if (up_or_down(*first_b, pos) == 1)
+		{
+			while((*first_b)->position != pos)
+				moves("rb", first_a, first_b);
+			moves("pa", first_a, first_b);
+			ft_printf("test");
+			pos++;
+		}
+		/* if (up_or_down(*first_b, pos) == 2)
+		{
+			while((*first_b)->position != pos)
+				moves("rrb", first_a, first_b);
+			moves("pa", first_a, first_b);
+			pos++;
+		} */
+		if ((*first_b)->previous->position == pos)
+		{
+			moves("rrb", first_a, first_b);
+			moves("pa", first_a, first_b);
+			pos++;
 		}
 	}
 }
-
 void	lets_sort(t_stack **first_a, t_stack **first_b)
 {
-	int	ss_len;
-
-	ss_len = stack_len(*first_a) % 10;
 	half_sort_b(first_a, first_b);
-
+	//back_to_a(first_a, first_b);
+	test_print(*first_b, "B");
+	//ft_printf("%d\n", up_or_down(*first_b, 2));
 
 }

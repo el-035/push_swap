@@ -33,7 +33,7 @@ int		ft_strcmp(char *s1, char *s2);
 int		find_max(t_stack *first);
 
 //struct_utils
-t_stack	*new(int data, char stack);
+t_stack	*new(int data, char stack, int sub_stack);
 t_stack	*new_last(t_stack *prev, int data, char stack);
 t_stack	*new_first(t_stack **first, int data, char stack, int sub_stack);
 int	    stack_len(t_stack *first);
@@ -63,6 +63,8 @@ void	order_b(t_stack **first_a, t_stack **first_b);
 int	    biggest_ss(t_stack *first_a, int smallest);
 void	initialise_ss(t_stack **first);
 void	lets_sort(t_stack **first_a, t_stack **first_b);
+int	    next_small(t_stack *first, int biggest);
+void	initialise_position(t_stack **first);
 
 //three five
 void    three_five(t_stack **first_a, t_stack **first_b);

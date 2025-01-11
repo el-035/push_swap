@@ -11,7 +11,7 @@ t_stack	*allocate_stack_a(char **input)
 	int		i;
 
 	i = 1;
-	first = new(atoi_ps(input[i++]), 'a');
+	first = new(atoi_ps(input[i++]), 'a', 0);
 	if (!first)
 		error(NULL, NULL);
 	stack = new_last(first, atoi_ps(input[i++]), 'a');
@@ -33,30 +33,6 @@ t_stack	*allocate_stack_a(char **input)
 	return (first);
 }
 
-void test_print(t_stack *stack, const char *name)
-{
-    t_stack *current;
-    int count = 1;
-
-    printf("Stack %s:\n", name);
-    if (!stack)
-    {
-        printf("  [Empty]\n\n");
-        return;
-    }
-
-    current = stack;
-    do
-    {//stack = %c, current = %p, previous = %p, next = %p
-        printf("  Node %d: data = %d, ss = %d\n",
-               count++, current->data, current->sub_stack/* current->stack, (void *)current,
-			   (void *)current->previous, (void *)current->next */);
-        current = current->next;
-    } while (current && current->data != stack->data);
-
-    printf("\n");
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	*first_a;
@@ -71,13 +47,6 @@ int	main(int argc, char **argv)
 		three_five(&first_a, &first_b);
 	else
 		lets_sort(&first_a, &first_b);
-	test_print_combined(first_a, first_b);
-	//test_print(first_a, "Stack A");
-	/* else
-		algorithm(&first_a, &first_b);
-	if (is_sorted(first_b) == 1)
-		ft_printf("COOL"); */
-	//ft_printf("%d\n", biggest_ss(first_a, 1));
 	free_stack(&first_a);
 	free_stack(&first_b);
 }

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_stack	*new(int data, char stack)
+t_stack	*new(int data, char stack, int sub_stack)
 {
 	t_stack	*new;
 
@@ -9,6 +9,7 @@ t_stack	*new(int data, char stack)
 		return NULL;	//free + error
 	new->data = data;
 	new->stack = stack;
+	new->sub_stack = sub_stack;
 	new->previous = NULL;
 	new->next = NULL;
 	return (new);
@@ -33,7 +34,7 @@ t_stack	*new_first(t_stack **first, int data, char stack, int sub_stack)
 	t_stack	*add;
 
 	if (!*first)
-		return(new(data, stack));
+		return(new(data, stack, sub_stack));
 	add = (t_stack *) malloc(sizeof(t_stack));
 	if (!add)
 		return NULL;
