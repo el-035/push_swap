@@ -47,6 +47,9 @@ int	main(int argc, char **argv)
 		three_five(&first_a, &first_b);
 	else
 		lets_sort(&first_a, &first_b);
+	if (is_sorted(first_a))
+		ft_printf("COOOOOLLL\n");
+	
 	free_stack(&first_a);
 	free_stack(&first_b);
 }

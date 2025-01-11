@@ -12,7 +12,7 @@ int	biggest_ss(t_stack *first_a, int smallest)
 
 	i = 0;
 	start = first_a;
-	while(i < 10)
+	while(i < 20)
 	{
 		first_a = start;
 		next = find_max(first_a);
@@ -40,9 +40,9 @@ void	initialise_ss(t_stack **first)
 	int		min;
 	int		tot_ss;
 
-	tot_ss = stack_len(*first) / 10;
-	if (stack_len(*first) % 10 != 0)
-		tot_ss = stack_len(*first) / 10 + 1;
+	tot_ss = stack_len(*first) / 20;
+	if (stack_len(*first) % 20 != 0)
+		tot_ss = stack_len(*first) / 20 + 1;
 	min = find_smallest(*first);
 	ss_count = 1;
 	ss_max = biggest_ss((*first), min);
@@ -127,31 +127,6 @@ void test_print(t_stack *stack, const char *name)
 
     printf("\n");
 }
-void	half_sort_b(t_stack **first_a, t_stack **first_b)
-{
-	int	ss;
-	int	n;
-
-	ss = 1;
-	n = 0;
-	initialise_ss(first_a);
-	while (*first_a)
-	{
-		if ((*first_a)->sub_stack != ss && (*first_a)->next)
-			moves("ra", first_a, first_b);
-		else if ((*first_a)->sub_stack == ss)
-		{
-			moves("pb", first_a, first_b);
-			n++;
-		}
-		if (n == 10)
-		{
-			n = 0;
-			ss++;
-		}
-	}
-	initialise_position(first_b);
-}
 int	up_or_down(t_stack *first, int pos)
 {
 	int	nodes;
@@ -174,56 +149,69 @@ int	up_or_down(t_stack *first, int pos)
 		return (2);
 	return (0);
 }
+
+void	half_sort_b(t_stack **first_a, t_stack **first_b)
+{
+	int	ss;
+	int	n;
+
+	ss = 1;
+	n = 0;
+	initialise_ss(first_a);
+	while (*first_a)
+	{
+		if ((*first_a)->sub_stack != ss && (*first_a)->next)
+			moves("ra", first_a, first_b);
+		else if ((*first_a)->sub_stack == ss)
+		{
+			moves("pb", first_a, first_b);
+			n++;
+		}
+		if (n == 20)
+		{
+			n = 0;
+			ss++;
+		}
+	}
+	initialise_position(first_b);
+}
+
 void	back_to_a(t_stack **first_a, t_stack **first_b)
 {
 	int	pos;
-	int max_pos;
 
-	test_print(*first_b, "B");
 	pos = 1;
-	max_pos = stack_len(*first_b);
-	while (pos <= max_pos)
+	while (*first_b)
 	{
-		test_print(*first_b, "B");
 		if ((*first_b)->position == pos)
 		{
 			moves("pa", first_a, first_b);
 			pos++;
-			ft_printf("%d\n", pos);
 		}
 		else if((*first_b)->next->position == pos)
 		{
 			moves("sb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
-			ft_printf("%d\n", pos);
 		}
 		else if ((*first_b)->previous->position == pos)
 		{
 			moves("rrb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
-			ft_printf("%d\n", pos);
 		}
+		else if (up_or_down(*first_b, pos) == 1)
+			moves("rb", first_a, first_b);
+		else if (up_or_down(*first_b, pos) == 2)
+			moves("rrb", first_a, first_b);
 		else
-		{
-			moves("rb", first_a, first_b);
-			moves("rb", first_a, first_b);
-			moves("rb", first_a, first_b);
-			moves("rb", first_a, first_b);
-			//moves("rb", first_a, first_b);
-			test_print(*first_b, "B");
-			if (pos == 4)
-				break ;
-			//test_print(*first_b, "B");
-		}
+			break ;
 	}
 }
 void	lets_sort(t_stack **first_a, t_stack **first_b)
 {
 	half_sort_b(first_a, first_b);
 	back_to_a(first_a, first_b);
-	//test_print(*first_b, "B");
 	//ft_printf("%d\n", up_or_down(*first_b, 49));
 
 }

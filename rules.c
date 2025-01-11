@@ -9,6 +9,9 @@ void	swap(t_stack *first)
 	temp = first->data;
 	first->data = first->next->data;
 	first->next->data = temp;
+	temp = first->position;
+	first->position = first->next->position;
+	first->next->position = temp;
 }
 
 void	push(t_stack **from, t_stack **to)
