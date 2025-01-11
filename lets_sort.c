@@ -170,7 +170,7 @@ int	up_or_down(t_stack *first, int pos)
 	}
 	if (count < (nodes / 2))
 		return (1); // close to top
-	else
+	else if (count > (nodes / 2))
 		return (2);
 	return (0);
 }
@@ -182,48 +182,48 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 	test_print(*first_b, "B");
 	pos = 1;
 	max_pos = stack_len(*first_b);
-	while (pos == 2)
+	while (pos <= max_pos)
 	{
-		test_print(*first_b, "A");
+		test_print(*first_b, "B");
 		if ((*first_b)->position == pos)
 		{
 			moves("pa", first_a, first_b);
 			pos++;
+			ft_printf("%d\n", pos);
 		}
-		if((*first_b)->next->position == pos)
+		else if((*first_b)->next->position == pos)
 		{
 			moves("sb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
+			ft_printf("%d\n", pos);
 		}
-		if (up_or_down(*first_b, pos) == 1)
-		{
-			while((*first_b)->position != pos)
-				moves("rb", first_a, first_b);
-			moves("pa", first_a, first_b);
-			ft_printf("test");
-			pos++;
-		}
-		/* if (up_or_down(*first_b, pos) == 2)
-		{
-			while((*first_b)->position != pos)
-				moves("rrb", first_a, first_b);
-			moves("pa", first_a, first_b);
-			pos++;
-		} */
-		if ((*first_b)->previous->position == pos)
+		else if ((*first_b)->previous->position == pos)
 		{
 			moves("rrb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
+			ft_printf("%d\n", pos);
+		}
+		else
+		{
+			moves("rb", first_a, first_b);
+			moves("rb", first_a, first_b);
+			moves("rb", first_a, first_b);
+			moves("rb", first_a, first_b);
+			//moves("rb", first_a, first_b);
+			test_print(*first_b, "B");
+			if (pos == 4)
+				break ;
+			//test_print(*first_b, "B");
 		}
 	}
 }
 void	lets_sort(t_stack **first_a, t_stack **first_b)
 {
 	half_sort_b(first_a, first_b);
-	//back_to_a(first_a, first_b);
-	test_print(*first_b, "B");
-	//ft_printf("%d\n", up_or_down(*first_b, 2));
+	back_to_a(first_a, first_b);
+	//test_print(*first_b, "B");
+	//ft_printf("%d\n", up_or_down(*first_b, 49));
 
 }
