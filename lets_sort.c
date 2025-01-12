@@ -12,7 +12,7 @@ int	biggest_ss(t_stack *first_a, int smallest)
 
 	i = 0;
 	start = first_a;
-	while(i < 20)
+	while(i < 23)
 	{
 		first_a = start;
 		next = find_max(first_a);
@@ -40,9 +40,9 @@ void	initialise_ss(t_stack **first)
 	int		min;
 	int		tot_ss;
 
-	tot_ss = stack_len(*first) / 20;
-	if (stack_len(*first) % 20 != 0)
-		tot_ss = stack_len(*first) / 20 + 1;
+	tot_ss = stack_len(*first) / 23;
+	if (stack_len(*first) % 23 != 0)
+		tot_ss = stack_len(*first) / 23 + 1;
 	min = find_smallest(*first);
 	ss_count = 1;
 	ss_max = biggest_ss((*first), min);
@@ -150,6 +150,30 @@ int	up_or_down(t_stack *first, int pos)
 	return (0);
 }
 
+int	find_pos(t_stack *first, int ss)
+{
+	t_stack *start;
+	int	pos;
+	int	nodes;
+
+	start = first;
+	if (!first || !first->next || !first->previous)
+		return (-1);
+	nodes = stack_len(first);
+	pos = 1;
+	while(first->next && first && first != start)
+	{
+		if (first->stack == ss)
+			break;
+		first = first->next;
+		pos++;
+	}
+	if (pos < (nodes / 2))
+		return (1); // close to top
+	else if (pos >= (nodes / 2))
+		return (2);
+	return (0);
+}
 void	half_sort_b(t_stack **first_a, t_stack **first_b)
 {
 	int	ss;
@@ -160,14 +184,16 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 	initialise_ss(first_a);
 	while (*first_a)
 	{
-		if ((*first_a)->sub_stack != ss && (*first_a)->next)
-			moves("ra", first_a, first_b);
-		else if ((*first_a)->sub_stack == ss)
+		if ((*first_a)->sub_stack == ss && *first_a)
 		{
 			moves("pb", first_a, first_b);
 			n++;
 		}
-		if (n == 20)
+		else if ((*first_a)->sub_stack != ss && (*first_a)->next && find_pos(*first_a, ss) == 1)
+			moves("ra", first_a, first_b);
+		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && find_pos(*first_a, ss) == 2)
+			moves("rra", first_a, first_b);
+		if (n == 23)
 		{
 			n = 0;
 			ss++;
@@ -175,7 +201,6 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 	}
 	initialise_position(first_b);
 }
-
 void	back_to_a(t_stack **first_a, t_stack **first_b)
 {
 	int	pos;
