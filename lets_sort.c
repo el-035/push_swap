@@ -12,7 +12,7 @@ int	biggest_ss(t_stack *first_a, int smallest)
 
 	i = 0;
 	start = first_a;
-	while(i < 23)
+	while(i < first_a->size)
 	{
 		first_a = start;
 		next = find_max(first_a);
@@ -40,9 +40,9 @@ void	initialise_ss(t_stack **first)
 	int		min;
 	int		tot_ss;
 
-	tot_ss = stack_len(*first) / 23;
-	if (stack_len(*first) % 23 != 0)
-		tot_ss = stack_len(*first) / 23 + 1;
+	tot_ss = stack_len(*first) / (*first)->size;
+	if (stack_len(*first) % (*first)->size != 0)
+		tot_ss = stack_len(*first) / (*first)->size + 1;
 	min = find_smallest(*first);
 	ss_count = 1;
 	ss_max = biggest_ss((*first), min);
@@ -104,29 +104,6 @@ void	initialise_position(t_stack **first)
 	}
 }
 
-void test_print(t_stack *stack, const char *name)
-{
-    t_stack *current;
-    int count = 1;
-
-    printf("Stack %s:\n", name);
-    if (!stack)
-    {
-        printf("  [Empty]\n\n");
-        return;
-    }
-
-    current = stack;
-    do
-    {//stack = %c, current = %p, previous = %p, next = %p
-        printf("  Node %d: data = %d, ss = %d, pos = %d\n",
-               count++, current->data, current->sub_stack, current->position/* current->stack, (void *)current,
-			   (void *)current->previous, (void *)current->next */);
-        current = current->next;
-    } while (current && current->data != stack->data);
-
-    printf("\n");
-}
 int	up_or_down(t_stack *first, int pos)
 {
 	int	nodes;
@@ -176,11 +153,13 @@ int	find_pos(t_stack *first, int ss)
 }
 void	half_sort_b(t_stack **first_a, t_stack **first_b)
 {
+	int	size;
 	int	ss;
 	int	n;
 
 	ss = 1;
 	n = 0;
+	size = (*first_a)->size;
 	initialise_ss(first_a);
 	while (*first_a)
 	{
@@ -193,13 +172,12 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 			moves("ra", first_a, first_b);
 		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && find_pos(*first_a, ss) == 2)
 			moves("rra", first_a, first_b);
-		if (n == 23)
+		if (n == size)
 		{
 			n = 0;
 			ss++;
 		}
 	}
-	initialise_position(first_b);
 }
 void	back_to_a(t_stack **first_a, t_stack **first_b)
 {
@@ -232,11 +210,4 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 		else
 			break ;
 	}
-}
-void	lets_sort(t_stack **first_a, t_stack **first_b)
-{
-	half_sort_b(first_a, first_b);
-	back_to_a(first_a, first_b);
-	//ft_printf("%d\n", up_or_down(*first_b, 49));
-
 }

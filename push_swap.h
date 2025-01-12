@@ -10,6 +10,7 @@ typedef struct s_stack
 {
     int				data;
     char            stack;
+	int				size;
     int             sub_stack;
 	int				position;
     struct s_stack  *previous;
@@ -65,6 +66,8 @@ void	initialise_ss(t_stack **first);
 void	lets_sort(t_stack **first_a, t_stack **first_b);
 int	    next_small(t_stack *first, int biggest);
 void	initialise_position(t_stack **first);
+void	back_to_a(t_stack **first_a, t_stack **first_b);
+void	half_sort_b(t_stack **first_a, t_stack **first_b);
 
 //three five
 void    three_five(t_stack **first_a, t_stack **first_b);

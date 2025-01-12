@@ -5,13 +5,13 @@ void	check_duplicates(char **input)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while(input[i])
 	{
 		j = i + 1;
 		while (input[j])
 		{
-			if (atoi_ps(input[i]) == atoi_ps(input[j]))	//./push_swap 1 -1 0 2 3 4 6 7, gives error here
+			if (atoi_ps(input[i]) == atoi_ps(input[j]))
 				error(NULL, NULL);
 			j++;
 		}
@@ -45,7 +45,7 @@ int	atoi_ps(const char *str)
 	if (result < -2147483648 || result > 2147483647)
 		error(NULL, NULL);
 	return ((int) result);
-}
+} 
 
 int	is_sorted(t_stack *first)
 {
@@ -65,7 +65,7 @@ int	is_sorted(t_stack *first)
 	}
 	return (1);
 }
-int	is_rev_sorted(t_stack *first)
+/* int	is_rev_sorted(t_stack *first)
 {
 	t_stack	*current;
 
@@ -82,7 +82,7 @@ int	is_rev_sorted(t_stack *first)
 			current = current->next;
 	}
 	return (1);
-}
+} */
 
 int	ft_strcmp(char *s1, char *s2)
 {

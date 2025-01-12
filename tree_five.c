@@ -16,7 +16,7 @@ void	sort_three(t_stack **first_a, t_stack **first_b)
 	else if (biggest(*first_a) == 1 && (*first_a)->next->data > (*first_a)->previous->data)
 	{
 		moves("ra", first_a, first_b);
-		moves("ra", first_a, first_b);
+		moves("sa", first_a, first_b);
 	}
 }
 void	push_smallest(t_stack **first_a, t_stack **first_b)
