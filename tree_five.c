@@ -2,6 +2,8 @@
 
 void	sort_three(t_stack **first_a, t_stack **first_b)
 {
+	if (is_sorted(*first_a))
+		return ;
 	if (biggest(*first_a) == 3)
 		moves("sa", first_a, first_b);
 	else if (biggest(*first_a) == 2 && (*first_a)->data < (*first_a)->previous->data)

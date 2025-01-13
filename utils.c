@@ -5,7 +5,7 @@ void	check_duplicates(char **input)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while(input[i])
 	{
 		j = i + 1;
@@ -36,6 +36,8 @@ int	atoi_ps(const char *str)
 			n = -1;
 		i++;
 	}
+	if (str[i] < 48 || str[i] > 57)
+			error(NULL, NULL);
 	if (str[i])
 	{
 		while (str[i] >= 48 && str[i] <= 57)

@@ -6,7 +6,7 @@ t_stack	*allocate_stack_a(char **input)
 	t_stack	*stack;
 	int		i;
 
-	i = 1;
+	i = 0;
 	first = new(atoi_ps(input[i++]), 'a', 0);
 	if (!first)
 		error(NULL, NULL);
@@ -46,7 +46,6 @@ void	ss_size(t_stack **first)
 }
 //still have 1 free to fix
 
-
 void	test_print(t_stack *first)
 {
 	t_stack *temp;
@@ -61,16 +60,35 @@ void	test_print(t_stack *first)
 	if(temp)
 		printf("%d\n", temp->data);
 }
+char	**check_input(char **arg)
+{
+	char	**input;
+
+	if (!arg[2])
+		input = ft_split(arg[1], ' ');
+	else
+	{
+		input = arg;
+		input++;
+	}
+	if (!input[1])
+		exit(1);
+	check_duplicates(input);
+	return(input);
+}
+
+// what if input is only one number
 
 int	main(int argc, char **argv)
 {
 	t_stack	*first_a;
 	t_stack	*first_b;
+	char	**input;
 
-	if (argc <= 2)
+	if (argc < 2)
 		return (0);
-	check_duplicates(argv);
-	first_a = allocate_stack_a(argv);
+	input = check_input(argv);
+	first_a = allocate_stack_a(input);
 	first_b = NULL;
 	ss_size(&first_a);
 	if (is_sorted(first_a))
@@ -84,6 +102,7 @@ int	main(int argc, char **argv)
 		back_to_a(&first_a, &first_b);
 	}
 	test_print(first_a);
+	test_print(first_b);
 	free_stack(&first_a);
 	free_stack(&first_b);
 }

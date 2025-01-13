@@ -191,23 +191,23 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		else if((*first_b)->next->position == pos)
+		if((*first_b)->next->position == pos)
 		{
 			moves("sb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		else if ((*first_b)->previous->position == pos)
+		if ((*first_b)->previous->position == pos)
 		{
 			moves("rrb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		else if (up_or_down(*first_b, pos) == 1)
+		if (up_or_down(*first_b, pos) == 1)
 			moves("rb", first_a, first_b);
-		else if (up_or_down(*first_b, pos) == 2)
+		if (up_or_down(*first_b, pos) == 2)
 			moves("rrb", first_a, first_b);
-		else
+		else 
 			break ;
 	}
 }

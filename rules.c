@@ -29,7 +29,12 @@ void	push(t_stack **from, t_stack **to)
 		error(from, to);
 	temp = *from;
 	if (!(*from)->next)
-		return (*from = NULL, free(*from));
+	{
+		free(*from);
+		*from = NULL;
+		return ;
+	}			something wrong here
+		//return (*from = NULL, free(*from));
 	(*from) = (*from)->next;
 	(*from)->previous = temp->previous;
 	temp->previous->next = (*from);
