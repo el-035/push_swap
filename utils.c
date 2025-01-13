@@ -1,25 +1,29 @@
 # include"push_swap.h"
 
-void	check_duplicates(char **input)
+void	check_duplicates(char **input, int flag)
 {
 	int	i;
 	int	j;
+	char 	**temp;
 
+	temp = NULL;
+	if (flag == 1)
+		temp = input;
 	i = 0;
 	while(input[i])
 	{
 		j = i + 1;
 		while (input[j])
 		{
-			if (atoi_ps(input[i]) == atoi_ps(input[j]))
-				error(NULL, NULL);
+			if (atoi_ps(input[i], temp) == atoi_ps(input[j], temp))
+					error(NULL, NULL, temp);
 			j++;
 		}
 		i++;
 	}
 }
 
-int	atoi_ps(const char *str)
+int	atoi_ps(const char *str, char **input)
 {
 	int				i;
 	long long		result;
@@ -37,7 +41,7 @@ int	atoi_ps(const char *str)
 		i++;
 	}
 	if (str[i] < 48 || str[i] > 57)
-			error(NULL, NULL);
+			error(NULL, NULL, input);
 	if (str[i])
 	{
 		while (str[i] >= 48 && str[i] <= 57)
@@ -45,7 +49,7 @@ int	atoi_ps(const char *str)
 	}
 	result = result * n;
 	if (result < -2147483648 || result > 2147483647)
-		error(NULL, NULL);
+		error(NULL, NULL, input);
 	return ((int) result);
 } 
 

@@ -7,20 +7,20 @@ t_stack	*allocate_stack_a(char **input)
 	int		i;
 
 	i = 0;
-	first = new(atoi_ps(input[i++]), 'a', 0);
+	first = new(atoi_ps(input[i++], 0), 'a', 0);
 	if (!first)
-		error(NULL, NULL);
-	stack = new_last(first, atoi_ps(input[i++]), 'a');
+		error(NULL, NULL, NULL);
+	stack = new_last(first, atoi_ps(input[i++], 0), 'a');
 	if (!stack)
-		error(&first, NULL);
+		error(&first, NULL, NULL);
 	first->size = 1;
 	first->next = stack;
 	stack->size = 1;
 	while(input[i])
 	{
-		stack->next = new_last(stack, atoi_ps(input[i++]), 'a');
+		stack->next = new_last(stack, atoi_ps(input[i++], 0), 'a');
 		if (!stack->next)
-			error(&stack, NULL);
+			error(&stack, NULL, NULL);
 		stack->next->size = 1;
 		stack = stack->next;
 	}
@@ -72,21 +72,30 @@ void	ss_size(t_stack **first)
 		current = current->next;
 	}
 }
-char	**check_input(char **arg)
+t_stack	*check_input(char **arg)
 {
+	t_stack	*first_a;
 	char	**input;
+	int		flag;
 
+	flag = 0;
 	if (!arg[2])
+	{
 		input = ft_split(arg[1], ' ');
+		flag = 1;
+	}
 	else
 	{
 		input = arg;
 		input++;
 	}
 	if (!input[1])
-		exit(1);
-	check_duplicates(input);
-	return(input);
+		error(NULL, NULL, input);
+	check_duplicates(input, flag);
+	first_a = allocate_stack_a(input);
+	if (flag == 1)
+		free_input(input);
+	return(first_a);
 }
 
 // what if input is only one number
@@ -95,12 +104,10 @@ int	main(int argc, char **argv)
 {
 	t_stack	*first_a;
 	t_stack	*first_b;
-	char	**input;
 
 	if (argc < 2)
 		return (0);
-	input = check_input(argv);
-	first_a = allocate_stack_a(input);
+	first_a = check_input(argv);
 	first_b = NULL;
 	ss_size(&first_a);
 	if (is_sorted(first_a))

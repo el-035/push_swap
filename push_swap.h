@@ -24,8 +24,8 @@ void test_print_combined(t_stack *stack_a, t_stack *stack_b);
 t_stack	*allocate_stack_a(char **input);
 
 //utils
-void	check_duplicates(char **input);
-int		atoi_ps(const char *str);
+void	check_duplicates(char **input, int flag);
+int		atoi_ps(const char *str, char **input);
 int		is_sorted(t_stack *first);
 int		is_rev_sorted(t_stack *first);
 int		ft_strcmp(char *s1, char *s2);
@@ -74,7 +74,8 @@ void    three_five(t_stack **first_a, t_stack **first_b);
 void	sort_three(t_stack **first_a, t_stack **first_b);
 
 //error + free
-void	error(t_stack **first_a, t_stack **first_b);
+void	error(t_stack **first_a, t_stack **first_b, char **input);
 void	free_stack(t_stack	**stack);
+void	free_input(char **input);
 
 #endif
