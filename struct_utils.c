@@ -6,7 +6,7 @@ t_stack	*new(int data, char stack, int sub_stack)
 
 	new = (t_stack *) malloc(sizeof(t_stack));
 	if (!new)
-		return NULL;	//free + error
+		return (error(NULL, NULL, NULL), NULL);	//free + error
 	new->data = data;
 	new->stack = stack;
 	new->sub_stack = sub_stack;
@@ -21,7 +21,7 @@ t_stack	*new_last(t_stack *prev, int data, char stack)
 
 	last = (t_stack *) malloc(sizeof(t_stack));
 	if (!last)
-		return NULL;	//free + error
+		return (error(&prev, NULL, NULL), NULL);	//or last?
 	last->data = data;
 	last->stack = stack;
 	last->previous = prev;
@@ -37,7 +37,7 @@ t_stack	*new_first(t_stack **first, int data, char stack, int sub_stack)
 		return(new(data, stack, sub_stack));
 	add = (t_stack *) malloc(sizeof(t_stack));
 	if (!add)
-		return NULL;
+		return (error(first, NULL, NULL), NULL); //not add right?
 	add->data = data;
 	add->stack = stack;
 	add->sub_stack = sub_stack;

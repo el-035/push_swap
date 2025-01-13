@@ -10,6 +10,9 @@ void	check_duplicates(char **input, int flag)
 	if (flag == 1)
 		temp = input;
 	i = 0;
+	j = 1;
+	if (!input[j])
+		atoi_ps(input[i], temp);
 	while(input[i])
 	{
 		j = i + 1;
@@ -28,7 +31,6 @@ int	atoi_ps(const char *str, char **input)
 	int				i;
 	long long		result;
 	long long		n;
-
 	n = 1;
 	i = 0;
 	result = 0;

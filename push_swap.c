@@ -82,6 +82,8 @@ t_stack	*check_input(char **arg)
 	if (!arg[2])
 	{
 		input = ft_split(arg[1], ' ');
+		if (!input)
+			return (error(NULL, NULL, NULL), NULL);
 		flag = 1;
 	}
 	else
@@ -89,9 +91,9 @@ t_stack	*check_input(char **arg)
 		input = arg;
 		input++;
 	}
-	if (!input[1])
-		error(NULL, NULL, input);
 	check_duplicates(input, flag);
+	if (!input[1])
+		return (free_input(input), NULL);
 	first_a = allocate_stack_a(input);
 	if (flag == 1)
 		free_input(input);
@@ -99,6 +101,7 @@ t_stack	*check_input(char **arg)
 }
 
 // what if input is only one number
+//check all mallocs
 
 int	main(int argc, char **argv)
 {
@@ -108,6 +111,8 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	first_a = check_input(argv);
+	if (!first_a)
+		return (0);
 	first_b = NULL;
 	ss_size(&first_a);
 	if (is_sorted(first_a))
