@@ -30,11 +30,11 @@ void	push(t_stack **from, t_stack **to)
 	temp = *from;
 	if (!(*from)->next)
 	{
-		free(*from);
+		free_stack(from);
 		*from = NULL;
 		return ;
-	}			something wrong here
-		//return (*from = NULL, free(*from));
+		//return (*from = NULL, free_stack(*from));
+	}
 	(*from) = (*from)->next;
 	(*from)->previous = temp->previous;
 	temp->previous->next = (*from);

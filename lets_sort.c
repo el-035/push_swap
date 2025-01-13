@@ -122,7 +122,7 @@ int	up_or_down(t_stack *first, int pos)
 	}
 	if (count < (nodes / 2))
 		return (1); // close to top
-	else if (count > (nodes / 2))
+	else if (count >= (nodes / 2))
 		return (2);
 	return (0);
 }
@@ -191,23 +191,27 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		if((*first_b)->next->position == pos)
+		else if((*first_b)->next->position == pos)
 		{
 			moves("sb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		if ((*first_b)->previous->position == pos)
+		else if ((*first_b)->previous->position == pos)
 		{
 			moves("rrb", first_a, first_b);
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		if (up_or_down(*first_b, pos) == 1)
+		else if ((*first_b)->next != (*first_b)->previous && up_or_down(*first_b, pos) == 1)
 			moves("rb", first_a, first_b);
-		if (up_or_down(*first_b, pos) == 2)
+		else if ((*first_b)->next != (*first_b)->previous && up_or_down(*first_b, pos) == 2)
 			moves("rrb", first_a, first_b);
-		else 
+		else if (first_b == NULL)
+		{
+			//ft_printf("%d", up_or_down(*first_b, pos));
 			break ;
+		}
+		//ft_printf("current position to be pushed: %d\n", pos);
 	}
 }

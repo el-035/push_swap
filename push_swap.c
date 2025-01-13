@@ -13,12 +13,15 @@ t_stack	*allocate_stack_a(char **input)
 	stack = new_last(first, atoi_ps(input[i++]), 'a');
 	if (!stack)
 		error(&first, NULL);
+	first->size = 1;
 	first->next = stack;
+	stack->size = 1;
 	while(input[i])
 	{
 		stack->next = new_last(stack, atoi_ps(input[i++]), 'a');
 		if (!stack->next)
 			error(&stack, NULL);
+		stack->next->size = 1;
 		stack = stack->next;
 	}
 	stack->next = first;
@@ -26,6 +29,31 @@ t_stack	*allocate_stack_a(char **input)
 	return (first);
 }
 
+//still have 1 free to fix
+
+void test_print(t_stack *stack, const char *name)
+{
+    t_stack *current;
+    int count = 1;
+
+    printf("Stack %s:\n", name);
+    if (!stack)
+    {
+        printf("  [Empty]\n\n");
+        return;
+    }
+
+    current = stack;
+    do
+    {//stack = %c, current = %p, previous = %p, next = %p
+        printf("  Node %d: data = %d, size = %d\n",
+               count++, current->data, current->position/* current->stack, (void *)current,
+			   (void *)current->previous, (void *)current->next */);
+        current = current->next;
+    } while (current && current->data != stack->data);
+
+    printf("\n");
+}
 void	ss_size(t_stack **first)
 {
 	t_stack	*current;
@@ -38,27 +66,11 @@ void	ss_size(t_stack **first)
 	else
 		size = 18;
 	current = *first;
-	while (current->size == 0)
+	while (current->size == 1)
 	{
 		current->size = size;
 		current = current->next;
 	}
-}
-//still have 1 free to fix
-
-void	test_print(t_stack *first)
-{
-	t_stack *temp;
-
-	temp = first;
-	printf(" A\n");
-	while(temp->next && temp->next != first)
-	{
-		printf("%d\n", temp->data);
-		temp = temp->next;
-	}
-	if(temp)
-		printf("%d\n", temp->data);
 }
 char	**check_input(char **arg)
 {
@@ -101,8 +113,8 @@ int	main(int argc, char **argv)
 		initialise_position(&first_b);
 		back_to_a(&first_a, &first_b);
 	}
-	test_print(first_a);
-	test_print(first_b);
+	/* test_print(first_a, "a");
+	test_print(first_b, "b"); */
 	free_stack(&first_a);
 	free_stack(&first_b);
 }
