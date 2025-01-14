@@ -1,4 +1,16 @@
-#include"push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efittant <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 18:50:20 by efittant          #+#    #+#             */
+/*   Updated: 2025/01/14 18:50:23 by efittant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 t_stack	*allocate_stack_a(char **input)
 {
@@ -16,7 +28,7 @@ t_stack	*allocate_stack_a(char **input)
 	first->size = 1;
 	first->next = stack;
 	stack->size = 1;
-	while(input[i])
+	while (input[i])
 	{
 		stack->next = new_last(stack, atoi_ps(input[i++], 0), 'a');
 		if (!stack->next)
@@ -90,17 +102,14 @@ t_stack	*check_input(char **arg)
 		flag = 1;
 	}
 	else
-	{
-		input = arg;
-		input++;
-	}
+		input = arg + 1;
 	check_duplicates(input, flag);
 	if (!input[1])
 		return (free_input(input), NULL);
 	first_a = allocate_stack_a(input);
 	if (flag == 1)
 		free_input(input);
-	return(first_a);
+	return (first_a);
 }
 
 //check all mallocs

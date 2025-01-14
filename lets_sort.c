@@ -1,33 +1,45 @@
-#include"push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lets_sort.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efittant <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 18:49:41 by efittant          #+#    #+#             */
+/*   Updated: 2025/01/14 18:49:43 by efittant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "push_swap.h"
 
-
-void	initialise_ss(t_stack **first)
+void	initialise_ss(t_stack *first)
 {
+	t_stack	*temp;
 	int		ss_count;
 	int		ss_max;
 	int		len;
 	int		min;
 	int		tot_ss;
 
-	tot_ss = stack_len(*first) / (*first)->size;
-	if (stack_len(*first) % (*first)->size != 0)
-		tot_ss = stack_len(*first) / (*first)->size + 1;
-	min = find_smallest(*first);
+	temp = first;
+	tot_ss = stack_len(temp) / (temp)->size;
+	if (stack_len(temp) % (temp)->size != 0)
+		tot_ss = stack_len(temp) / (temp)->size + 1;
+	min = find_smallest(temp);
 	ss_count = 1;
-	ss_max = biggest_ss((*first), min);
+	ss_max = biggest_ss((temp), min);
 	while (ss_count <= tot_ss)
 	{
-		len = stack_len(*first);
+		len = stack_len(temp);
 		while (len-- > 0)
 		{
-			if ((*first)->data <= ss_max && (*first)->data >= min)
-				(*first)->sub_stack = ss_count;
-			(*first) = (*first)->next;
+			if ((temp)->data <= ss_max && (temp)->data >= min)
+				(temp)->sub_stack = ss_count;
+			(temp) = (temp)->next;
 		}
 		ss_count++;
 		min = ss_max;
-		ss_max = biggest_ss((*first), min);
+		ss_max = biggest_ss((temp), min);
 	}
 }
 
@@ -68,7 +80,7 @@ int	top_bottom(t_stack *first, int target, int flag)
 		count++;
 	}
 	if (count < (nodes / 2))
-		return (1); // close to top
+		return (1);
 	else if (count >= (nodes / 2))
 		return (2);
 	return (0);
@@ -83,7 +95,7 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 	ss = 1;
 	n = 0;
 	size = (*first_a)->size;
-	initialise_ss(first_a);
+	initialise_ss(*first_a);
 	while (*first_a)
 	{
 		if ((*first_a)->sub_stack == ss && *first_a)
@@ -91,9 +103,11 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 			moves("pb", first_a, first_b);
 			n++;
 		}
-		else if ((*first_a)->sub_stack != ss && (*first_a)->next && top_bottom(*first_a, ss, 1) == 1)
+		else if ((*first_a)->sub_stack != ss && (*first_a)->next && \
+		top_bottom(*first_a, ss, 1) == 1)
 			moves("ra", first_a, first_b);
-		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && top_bottom(*first_a, ss, 1) == 2)
+		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && \
+		top_bottom(*first_a, ss, 1) == 2)
 			moves("rra", first_a, first_b);
 		if (n == size)
 		{
@@ -115,7 +129,7 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		else if((*first_b)->next->position == pos)
+		else if ((*first_b)->next->position == pos)
 		{
 			moves("sb", first_a, first_b);
 			moves("pa", first_a, first_b);
@@ -127,9 +141,11 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 1)
+		else if ((*first_b)->next != (*first_b)->previous && \
+		top_bottom(*first_b, pos, 0) == 1)
 			moves("rb", first_a, first_b);
-		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 2)
+		else if ((*first_b)->next != (*first_b)->previous && \
+		top_bottom(*first_b, pos, 0) == 2)
 			moves("rrb", first_a, first_b);
 	}
 }

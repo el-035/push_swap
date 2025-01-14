@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efittant <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 18:49:32 by efittant          #+#    #+#             */
+/*   Updated: 2025/01/14 18:49:35 by efittant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	error(t_stack **first_a, t_stack **first_b, char **input)
@@ -11,7 +23,8 @@ void	error(t_stack **first_a, t_stack **first_b, char **input)
 		free_input(input);
 	exit(1);
 }
-void free_input(char **input)
+
+void	free_input(char **input)
 {
 	int	i;
 

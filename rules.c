@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rules.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efittant <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 18:50:34 by efittant          #+#    #+#             */
+/*   Updated: 2025/01/14 18:50:36 by efittant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(t_stack *first)
@@ -29,12 +41,7 @@ void	push(t_stack **from, t_stack **to)
 		error(from, to, NULL);
 	temp = *from;
 	if (!(*from)->next)
-	{
-		free_stack(from);
-		*from = NULL;
-		return ;
-		//return (*from = NULL, free_stack(*from));
-	}
+		return (*from = NULL, free_stack(from));
 	(*from) = (*from)->next;
 	(*from)->previous = temp->previous;
 	temp->previous->next = (*from);

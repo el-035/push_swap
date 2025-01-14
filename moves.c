@@ -1,4 +1,16 @@
-#include"push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efittant <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 18:50:11 by efittant          #+#    #+#             */
+/*   Updated: 2025/01/14 18:50:13 by efittant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 void	s(char *move, t_stack **first_a, t_stack **first_b)
 {
@@ -19,9 +31,9 @@ void	s(char *move, t_stack **first_a, t_stack **first_b)
 		swap(*first_b);
 	}
 }
+
 void	p(char *move, t_stack **first_a, t_stack **first_b)
 {
-
 	if (ft_strcmp(move, "pa") == 0)
 	{
 		ft_printf("pa\n");
@@ -33,6 +45,7 @@ void	p(char *move, t_stack **first_a, t_stack **first_b)
 		push(first_a, first_b);
 	}
 }
+
 void	r(char *move, t_stack **first_a, t_stack **first_b)
 {
 	if (ft_strcmp(move, "ra") == 0)
@@ -52,6 +65,7 @@ void	r(char *move, t_stack **first_a, t_stack **first_b)
 		(*first_b) = rotate(*first_b);
 	}
 }
+
 void	rr(char *move, t_stack **first_a, t_stack **first_b)
 {
 	if (ft_strcmp(move, "rra") == 0)
@@ -71,6 +85,7 @@ void	rr(char *move, t_stack **first_a, t_stack **first_b)
 		(*first_b) = rev_rot(*first_b);
 	}
 }
+
 void	moves(char *move, t_stack **first_a, t_stack **first_b)
 {
 	s(move, first_a, first_b);

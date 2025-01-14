@@ -1,10 +1,22 @@
-# include"push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efittant <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 18:51:02 by efittant          #+#    #+#             */
+/*   Updated: 2025/01/14 18:51:04 by efittant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 void	check_duplicates(char **input, int flag)
 {
-	int	i;
-	int	j;
-	char 	**temp;
+	int		i;
+	int		j;
+	char	**temp;
 
 	temp = NULL;
 	if (flag == 1)
@@ -13,13 +25,13 @@ void	check_duplicates(char **input, int flag)
 	j = 1;
 	if (!input[j])
 		atoi_ps(input[i], temp);
-	while(input[i])
+	while (input[i])
 	{
 		j = i + 1;
 		while (input[j])
 		{
 			if (atoi_ps(input[i], temp) == atoi_ps(input[j], temp))
-					error(NULL, NULL, temp);
+				error(NULL, NULL, temp);
 			j++;
 		}
 		i++;
@@ -32,7 +44,7 @@ int	atoi_ps(const char *str, char **input)
 	long long		result;
 	long long		n;
 	int				digit;
-	
+
 	n = 1;
 	i = 0;
 	result = 0;
@@ -57,7 +69,7 @@ int	atoi_ps(const char *str, char **input)
 	if (result < -2147483648 || result > 2147483647)
 		error(NULL, NULL, input);
 	return ((int) result);
-} 
+}
 
 int	biggest_ss(t_stack *first_a, int smallest)
 {
@@ -68,7 +80,7 @@ int	biggest_ss(t_stack *first_a, int smallest)
 
 	i = 0;
 	start = first_a;
-	while(i < first_a->size)
+	while (i < first_a->size)
 	{
 		first_a = start;
 		next = find_max(first_a);

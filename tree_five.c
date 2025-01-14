@@ -1,4 +1,16 @@
-#include"push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tree_five.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efittant <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 18:50:53 by efittant          #+#    #+#             */
+/*   Updated: 2025/01/14 18:50:55 by efittant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 void	sort_three(t_stack **first_a, t_stack **first_b)
 {
@@ -6,21 +18,26 @@ void	sort_three(t_stack **first_a, t_stack **first_b)
 		return ;
 	if (biggest(*first_a) == 3)
 		moves("sa", first_a, first_b);
-	else if (biggest(*first_a) == 2 && (*first_a)->data < (*first_a)->previous->data)
+	else if (biggest(*first_a) == 2 && (*first_a)->data < \
+		(*first_a)->previous->data)
 	{
 		moves("sa", first_a, first_b);
 		moves("ra", first_a, first_b);
 	}
-	else if (biggest(*first_a) == 2 && (*first_a)->data > (*first_a)->previous->data)
+	else if (biggest(*first_a) == 2 && (*first_a)->data > \
+		(*first_a)->previous->data)
 		moves("rra", first_a, first_b);
-	else if (biggest(*first_a) == 1 && (*first_a)->next->data < (*first_a)->previous->data)
+	else if (biggest(*first_a) == 1 && (*first_a)->next->data < \
+		(*first_a)->previous->data)
 		moves("ra", first_a, first_b);
-	else if (biggest(*first_a) == 1 && (*first_a)->next->data > (*first_a)->previous->data)
+	else if (biggest(*first_a) == 1 && (*first_a)->next->data > \
+		(*first_a)->previous->data)
 	{
 		moves("ra", first_a, first_b);
 		moves("sa", first_a, first_b);
 	}
 }
+
 void	push_smallest(t_stack **first_a, t_stack **first_b)
 {
 	int		count;
@@ -76,12 +93,12 @@ void	three_five(t_stack **first_a, t_stack **first_b)
 
 	len = stack_len(*first_a);
 	if (is_sorted(*first_a) == 1)
-		return;
+		return ;
 	else if (len == 2 && is_sorted(*first_a) == 0)
 		moves("sa", first_a, first_b);
 	else if (len == 3)
 		sort_three(first_a, first_b);
-	if 	(len == 4 || len == 5)
+	if (len == 4 || len == 5)
 	{
 		if (len == 5)
 			push_smallest(first_a, first_b);
@@ -102,7 +119,7 @@ int	is_sorted(t_stack *first)
 	current = first->next;
 	if (first->data > current->data)
 		return (0);
-	while(current->next != first)
+	while (current->next != first)
 	{
 		if (current->data > current->next->data)
 			return (0);
