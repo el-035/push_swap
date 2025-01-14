@@ -37,9 +37,9 @@ t_stack	*check_input(char **arg);
 //utils
 void	check_duplicates(char **input, int flag);
 int		atoi_ps(const char *str, char **input);
+void	is_digit(char *str, int pos, char **input);
 int		ft_strcmp(char *s1, char *s2);
 int		find_max(t_stack *first);
-int		biggest_ss(t_stack *first_a, int smallest);
 
 //struct_utils
 t_stack	*new(int data, char stack, int sub_stack);
@@ -64,9 +64,13 @@ void	moves(char *move, t_stack **first_a, t_stack **first_b);
 //lest sort
 void	initialise_ss(t_stack *first);
 int		next_small(t_stack *first, int biggest);
-void	back_to_a(t_stack **first_a, t_stack **first_b);
+int		back_to_a(t_stack **first_a, t_stack **first_b, int pos);
 void	half_sort_b(t_stack **first_a, t_stack **first_b);
-int		top_bottom(t_stack *first, int target, int flag);
+void	sort_a(t_stack **first_a, t_stack **first_b);
+
+//sort utils
+int		biggest_ss(t_stack *first_a, int smallest);
+int		top_bottom(t_stack *first, int target);
 
 //three five
 void	sort_three(t_stack **first_a, t_stack **first_b);

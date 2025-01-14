@@ -43,7 +43,6 @@ int	atoi_ps(const char *str, char **input)
 	int				i;
 	long long		result;
 	long long		n;
-	int				digit;
 
 	n = 1;
 	i = 0;
@@ -57,12 +56,7 @@ int	atoi_ps(const char *str, char **input)
 		if (!str[++i])
 			error(NULL, NULL, input);
 	}
-	digit = i;
-	while (str[digit])
-	{
-		if (!ft_isdigit(str[digit++]))
-			error(NULL, NULL, input);
-	}
+	is_digit((char *) str, i, input);
 	while (str[i] && str[i] >= 48 && str[i] <= 57)
 		result = result * 10 + str[i++] - 48;
 	result = result * n;
@@ -71,33 +65,13 @@ int	atoi_ps(const char *str, char **input)
 	return ((int) result);
 }
 
-int	biggest_ss(t_stack *first_a, int smallest)
+void	is_digit(char *str, int pos, char **input)
 {
-	t_stack	*start;
-	int		next;
-	int		i;
-	int		len;
-
-	i = 0;
-	start = first_a;
-	while (i < first_a->size)
+	while (str[pos])
 	{
-		first_a = start;
-		next = find_max(first_a);
-		len = stack_len(first_a);
-		while (len-- > 0)
-		{
-			if (first_a->data < next && first_a->data > smallest)
-				next = first_a->data;
-			first_a = first_a->next;
-		}
-		if (next == smallest)
-			i++;
-		smallest = next;
-		i++;
+		if (!ft_isdigit(str[pos++]))
+			error(NULL, NULL, input);
 	}
-	first_a = start;
-	return (smallest);
 }
 
 int	ft_strcmp(char *s1, char *s2)

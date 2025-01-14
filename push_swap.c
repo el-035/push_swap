@@ -63,20 +63,20 @@ void	ss_size(t_stack **first)
 void	initialise_position(t_stack **first)
 {
 	t_stack	*temp;
-	int		biggest;
+	int		current;
 	int		pos;
 
 	temp = (*first);
-	biggest = find_max(*first);
+	current = find_max(*first);
 	pos = 1;
 	while (temp)
 	{
-		if (temp->data == biggest && biggest != find_smallest(temp))
+		if (temp->data == current && current != find_smallest(temp))
 		{
 			temp->position = pos++;
-			biggest = next_small(*first, biggest);
+			current = next_small(*first, current);
 		}
-		if (biggest == find_smallest(temp) && temp->data == biggest)
+		if (current == find_smallest(temp) && temp->data == current)
 		{
 			temp->position = pos;
 			break ;
@@ -132,9 +132,10 @@ int	main(int argc, char **argv)
 		three_five(&first_a, &first_b);
 	else
 	{
+		initialise_ss(first_a);
 		half_sort_b(&first_a, &first_b);
 		initialise_position(&first_b);
-		back_to_a(&first_a, &first_b);
+		sort_a(&first_a, &first_b);
 	}
 	free_stack(&first_a);
 	free_stack(&first_b);
