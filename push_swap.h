@@ -26,9 +26,9 @@ t_stack	*check_input(char **arg);
 //utils
 void	check_duplicates(char **input, int flag);
 int		atoi_ps(const char *str, char **input);
-int		is_sorted(t_stack *first);
 int		ft_strcmp(char *s1, char *s2);
 int		find_max(t_stack *first);
+int	    biggest_ss(t_stack *first_a, int smallest);
 
 //struct_utils
 t_stack	*new(int data, char stack, int sub_stack);
@@ -51,19 +51,18 @@ void	rr(char *move, t_stack **first_a, t_stack **first_b);
 void	moves(char *move, t_stack **first_a, t_stack **first_b);
 
 //lest sort
-int	    biggest_ss(t_stack *first_a, int smallest);
 void	initialise_ss(t_stack **first);
 int	    next_small(t_stack *first, int biggest);
 void	back_to_a(t_stack **first_a, t_stack **first_b);
 void	half_sort_b(t_stack **first_a, t_stack **first_b);
-int	    up_or_down(t_stack *first, int pos);
-int	    find_pos(t_stack *first, int ss);
+int	    top_bottom(t_stack *first, int target, int flag);
 
 //three five
 void	sort_three(t_stack **first_a, t_stack **first_b);
 void    three_five(t_stack **first_a, t_stack **first_b);
 void	push_smallest(t_stack **first_a, t_stack **first_b);
 int		biggest(t_stack	*first);
+int		is_sorted(t_stack *first);
 
 //error + free
 void	error(t_stack **first_a, t_stack **first_b, char **input);

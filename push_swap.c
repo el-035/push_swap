@@ -49,6 +49,31 @@ void	ss_size(t_stack **first)
 		current = current->next;
 	}
 }
+void	initialise_position(t_stack **first)
+{
+	t_stack	*temp;
+	int		biggest;
+	int		pos;
+
+	temp = (*first);
+	biggest = find_max(*first);
+	pos = 1;
+	while (temp)
+	{
+		if (temp->data == biggest && biggest != find_smallest(temp))
+		{
+			temp->position = pos++;
+			biggest = next_small(*first, biggest);
+		}
+		if (biggest == find_smallest(temp) && temp->data == biggest)
+		{
+			temp->position = pos;
+			break ;
+		}
+		temp = temp->next;
+	}
+}
+
 t_stack	*check_input(char **arg)
 {
 	t_stack	*first_a;

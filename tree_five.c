@@ -92,3 +92,22 @@ void	three_five(t_stack **first_a, t_stack **first_b)
 		moves("pa", first_a, first_b);
 	}
 }
+
+int	is_sorted(t_stack *first)
+{
+	t_stack	*current;
+
+	if (!first)
+		return (0);
+	current = first->next;
+	if (first->data > current->data)
+		return (0);
+	while(current->next != first)
+	{
+		if (current->data > current->next->data)
+			return (0);
+		else
+			current = current->next;
+	}
+	return (1);
+}

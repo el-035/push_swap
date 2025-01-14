@@ -55,42 +55,34 @@ int	atoi_ps(const char *str, char **input)
 	return ((int) result);
 } 
 
-int	is_sorted(t_stack *first)
+int	biggest_ss(t_stack *first_a, int smallest)
 {
-	t_stack	*current;
+	t_stack	*start;
+	int		next;
+	int		i;
+	int		len;
 
-	if (!first)
-		return (0);
-	current = first->next;
-	if (first->data > current->data)
-		return (0);
-	while(current->next != first)
+	i = 0;
+	start = first_a;
+	while(i < first_a->size)
 	{
-		if (current->data > current->next->data)
-			return (0);
-		else
-			current = current->next;
+		first_a = start;
+		next = find_max(first_a);
+		len = stack_len(first_a);
+		while (len-- > 0)
+		{
+			if (first_a->data < next && first_a->data > smallest)
+				next = first_a->data;
+			first_a = first_a->next;
+		}
+		if (next == smallest)
+			i++;
+		smallest = next;
+		i++;
 	}
-	return (1);
+	first_a = start;
+	return (smallest);
 }
-/* int	is_rev_sorted(t_stack *first)
-{
-	t_stack	*current;
-
-	if (!first)
-		return (0);
-	current = first->next;
-	if (first->data < current->data)
-		return (0);
-	while(current->next != first)
-	{
-		if (current->data < current->next->data)
-			return (0);
-		else
-			current = current->next;
-	}
-	return (1);
-} */
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -106,4 +98,21 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
+}
+
+int	find_max(t_stack *first)
+{
+	int	max;
+	int	start;
+
+	start = first->data;
+	max = first->data;
+	first = first->next;
+	while (first->data != start)
+	{
+		if (first->data > max)
+			max = first->data;
+		first = first->next;
+	}
+	return (max);
 }

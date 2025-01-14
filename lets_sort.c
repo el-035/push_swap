@@ -1,36 +1,6 @@
 #include"push_swap.h"
 
-//find smallest already exists, lest see if it works
 
-
-int	biggest_ss(t_stack *first_a, int smallest)
-{
-	t_stack	*start;
-	int		next;
-	int		i;
-	int		len;
-
-	i = 0;
-	start = first_a;
-	while(i < first_a->size)
-	{
-		first_a = start;
-		next = find_max(first_a);
-		len = stack_len(first_a);
-		while (len-- > 0)
-		{
-			if (first_a->data < next && first_a->data > smallest)
-				next = first_a->data;
-			first_a = first_a->next;
-		}
-		if (next == smallest)
-			i++;
-		smallest = next;
-		i++;
-	}
-	first_a = start;
-	return (smallest);
-}
 
 void	initialise_ss(t_stack **first)
 {
@@ -79,30 +49,7 @@ int	next_small(t_stack *first, int biggest)
 	return (next);
 }
 
-void	initialise_position(t_stack **first)
-{
-	t_stack	*temp;
-	int		biggest;
-	int		pos;
 
-	temp = (*first);
-	biggest = find_max(*first);
-	pos = 1;
-	while (temp)
-	{
-		if (temp->data == biggest && biggest != find_smallest(temp))
-		{
-			temp->position = pos++;
-			biggest = next_small(*first, biggest);
-		}
-		if (biggest == find_smallest(temp) && temp->data == biggest)
-		{
-			temp->position = pos;
-			break ;
-		}
-		temp = temp->next;
-	}
-}
 int	top_bottom(t_stack *first, int target, int flag)
 {
 	int	nodes;
@@ -127,53 +74,7 @@ int	top_bottom(t_stack *first, int target, int flag)
 		return (2);
 	return (0);
 }
-int	up_or_down(t_stack *first, int pos)	//flag 0
-{
-	int	nodes;
-	int	count;
 
-	if (!first || !first->next || !first->previous)
-		return (-1);
-	nodes = stack_len(first);
-	count = 0;
-	while (count <= nodes)
-	{
-		if (first->position == pos)
-			break ;
-		first = first->next;
-		count++;
-	}
-	if (count < (nodes / 2))
-		return (1); // close to top
-	else if (count >= (nodes / 2))
-		return (2);
-	return (0);
-}
-
-int	find_pos(t_stack *first, int ss)	//flag is 1
-{
-	t_stack *start;
-	int	count;
-	int	nodes;
-
-	start = first;
-	if (!first || !first->next || !first->previous)
-		return (-1);
-	nodes = stack_len(first);
-	count = 1;
-	while(first->next && first && first != start)
-	{
-		if (first->sub_stack == ss)
-			break;
-		first = first->next;
-		count++;
-	}
-	if (count < (nodes / 2))
-		return (1); // close to top
-	else if (count >= (nodes / 2))
-		return (2);
-	return (0);
-}
 void	half_sort_b(t_stack **first_a, t_stack **first_b)
 {
 	int	size;
@@ -191,9 +92,9 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 			moves("pb", first_a, first_b);
 			n++;
 		}
-		else if ((*first_a)->sub_stack != ss && (*first_a)->next && top_bottom(*first_a, ss, 1) == 1/* find_pos(*first_a, ss) == 1 */)
+		else if ((*first_a)->sub_stack != ss && (*first_a)->next && top_bottom(*first_a, ss, 1) == 1)
 			moves("ra", first_a, first_b);
-		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && top_bottom(*first_a, ss, 1) == 2/* find_pos(*first_a, ss) == 2 */)
+		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && top_bottom(*first_a, ss, 1) == 2)
 			moves("rra", first_a, first_b);
 		if (n == size)
 		{
@@ -227,9 +128,9 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 1/* up_or_down(*first_b, pos) == 1 */)
+		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 1)
 			moves("rb", first_a, first_b);
-		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 2/* up_or_down(*first_b, pos) == 2 */)
+		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 2)
 			moves("rrb", first_a, first_b);
 	}
 }
