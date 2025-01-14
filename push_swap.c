@@ -29,8 +29,6 @@ t_stack	*allocate_stack_a(char **input)
 	return (first);
 }
 
-//still have 1 free to fix
-
 void	ss_size(t_stack **first)
 {
 	t_stack	*current;
@@ -49,6 +47,7 @@ void	ss_size(t_stack **first)
 		current = current->next;
 	}
 }
+
 void	initialise_position(t_stack **first)
 {
 	t_stack	*temp;
@@ -81,6 +80,8 @@ t_stack	*check_input(char **arg)
 	int		flag;
 
 	flag = 0;
+	if (!arg[1])
+		return (NULL);
 	if (!arg[2])
 	{
 		input = ft_split(arg[1], ' ');
@@ -102,7 +103,6 @@ t_stack	*check_input(char **arg)
 	return(first_a);
 }
 
-// what if input is only one number
 //check all mallocs
 
 int	main(int argc, char **argv)

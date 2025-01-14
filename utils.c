@@ -31,6 +31,8 @@ int	atoi_ps(const char *str, char **input)
 	int				i;
 	long long		result;
 	long long		n;
+	int				digit;
+	
 	n = 1;
 	i = 0;
 	result = 0;
@@ -40,15 +42,17 @@ int	atoi_ps(const char *str, char **input)
 	{
 		if (str[i] == '-')
 			n = -1;
-		i++;
-	}
-	if (str[i] < 48 || str[i] > 57)
+		if (!str[++i])
 			error(NULL, NULL, input);
-	if (str[i])
-	{
-		while (str[i] >= 48 && str[i] <= 57)
-			result = result * 10 + str[i++] - 48;
 	}
+	digit = i;
+	while (str[digit])
+	{
+		if (!ft_isdigit(str[digit++]))
+			error(NULL, NULL, input);
+	}
+	while (str[i] && str[i] >= 48 && str[i] <= 57)
+		result = result * 10 + str[i++] - 48;
 	result = result * n;
 	if (result < -2147483648 || result > 2147483647)
 		error(NULL, NULL, input);

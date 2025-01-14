@@ -49,7 +49,6 @@ int	next_small(t_stack *first, int biggest)
 	return (next);
 }
 
-
 int	top_bottom(t_stack *first, int target, int flag)
 {
 	int	nodes;
