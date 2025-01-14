@@ -31,29 +31,6 @@ t_stack	*allocate_stack_a(char **input)
 
 //still have 1 free to fix
 
-void test_print(t_stack *stack, const char *name)
-{
-    t_stack *current;
-    int count = 1;
-
-    printf("Stack %s:\n", name);
-    if (!stack)
-    {
-        printf("  [Empty]\n\n");
-        return;
-    }
-
-    current = stack;
-    do
-    {//stack = %c, current = %p, previous = %p, next = %p
-        printf("  Node %d: data = %d, size = %d\n",
-               count++, current->data, current->position/* current->stack, (void *)current,
-			   (void *)current->previous, (void *)current->next */);
-        current = current->next;
-    } while (current && current->data != stack->data);
-
-    printf("\n");
-}
 void	ss_size(t_stack **first)
 {
 	t_stack	*current;
@@ -125,8 +102,6 @@ int	main(int argc, char **argv)
 		initialise_position(&first_b);
 		back_to_a(&first_a, &first_b);
 	}
-	/* test_print(first_a, "a");
-	test_print(first_b, "b"); */
 	free_stack(&first_a);
 	free_stack(&first_b);
 }

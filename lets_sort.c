@@ -103,8 +103,31 @@ void	initialise_position(t_stack **first)
 		temp = temp->next;
 	}
 }
+int	top_bottom(t_stack *first, int target, int flag)
+{
+	int	nodes;
+	int	count;
 
-int	up_or_down(t_stack *first, int pos)
+	if (!first || !first->next || !first->previous)
+		return (-1);
+	count = flag;
+	nodes = stack_len(first);
+	while (count <= nodes)
+	{
+		if (flag == 0 && first->position == target)
+			break ;
+		else if (flag == 1 && first->sub_stack == target)
+			break ;
+		first = first->next;
+		count++;
+	}
+	if (count < (nodes / 2))
+		return (1); // close to top
+	else if (count >= (nodes / 2))
+		return (2);
+	return (0);
+}
+int	up_or_down(t_stack *first, int pos)	//flag 0
 {
 	int	nodes;
 	int	count;
@@ -127,27 +150,27 @@ int	up_or_down(t_stack *first, int pos)
 	return (0);
 }
 
-int	find_pos(t_stack *first, int ss)
+int	find_pos(t_stack *first, int ss)	//flag is 1
 {
 	t_stack *start;
-	int	pos;
+	int	count;
 	int	nodes;
 
 	start = first;
 	if (!first || !first->next || !first->previous)
 		return (-1);
 	nodes = stack_len(first);
-	pos = 1;
+	count = 1;
 	while(first->next && first && first != start)
 	{
-		if (first->stack == ss)
+		if (first->sub_stack == ss)
 			break;
 		first = first->next;
-		pos++;
+		count++;
 	}
-	if (pos < (nodes / 2))
+	if (count < (nodes / 2))
 		return (1); // close to top
-	else if (pos >= (nodes / 2))
+	else if (count >= (nodes / 2))
 		return (2);
 	return (0);
 }
@@ -168,9 +191,9 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 			moves("pb", first_a, first_b);
 			n++;
 		}
-		else if ((*first_a)->sub_stack != ss && (*first_a)->next && find_pos(*first_a, ss) == 1)
+		else if ((*first_a)->sub_stack != ss && (*first_a)->next && top_bottom(*first_a, ss, 1) == 1/* find_pos(*first_a, ss) == 1 */)
 			moves("ra", first_a, first_b);
-		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && find_pos(*first_a, ss) == 2)
+		else if ((*first_a)->sub_stack != ss && (*first_a)->previous && top_bottom(*first_a, ss, 1) == 2/* find_pos(*first_a, ss) == 2 */)
 			moves("rra", first_a, first_b);
 		if (n == size)
 		{
@@ -179,6 +202,7 @@ void	half_sort_b(t_stack **first_a, t_stack **first_b)
 		}
 	}
 }
+
 void	back_to_a(t_stack **first_a, t_stack **first_b)
 {
 	int	pos;
@@ -203,15 +227,9 @@ void	back_to_a(t_stack **first_a, t_stack **first_b)
 			moves("pa", first_a, first_b);
 			pos++;
 		}
-		else if ((*first_b)->next != (*first_b)->previous && up_or_down(*first_b, pos) == 1)
+		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 1/* up_or_down(*first_b, pos) == 1 */)
 			moves("rb", first_a, first_b);
-		else if ((*first_b)->next != (*first_b)->previous && up_or_down(*first_b, pos) == 2)
+		else if ((*first_b)->next != (*first_b)->previous && top_bottom(*first_b, pos, 0) == 2/* up_or_down(*first_b, pos) == 2 */)
 			moves("rrb", first_a, first_b);
-		else if (first_b == NULL)
-		{
-			//ft_printf("%d", up_or_down(*first_b, pos));
-			break ;
-		}
-		//ft_printf("current position to be pushed: %d\n", pos);
 	}
 }

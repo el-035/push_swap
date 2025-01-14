@@ -48,15 +48,26 @@ void	push_smallest(t_stack **first_a, t_stack **first_b)
 	moves("pb", first_a, first_b);
 }
 
-void	sort_five(t_stack **first_a, t_stack **first_b, int len)
+int	biggest(t_stack	*first)
 {
-	if (len == 5)
-		push_smallest(first_a, first_b);
-	push_smallest(first_a, first_b);
-	sort_three(first_a, first_b);
-	if (len == 5)
-		moves("pa", first_a, first_b);
-	moves("pa", first_a, first_b);
+	int	start;
+	int	second;
+	int	last;
+
+	if (!first)
+		return (-1);
+	if (!first->next || !first->previous)
+		return (1);
+	start = first->data;
+	second = first->next->data;
+	last = first->previous->data;
+	if (start > second && start > last)
+		return (1);
+	else if (second > start && second > last)
+		return (2);
+	else if (last > start && last > second)
+		return (3);
+	return (0);
 }
 
 void	three_five(t_stack **first_a, t_stack **first_b)
@@ -71,5 +82,13 @@ void	three_five(t_stack **first_a, t_stack **first_b)
 	else if (len == 3)
 		sort_three(first_a, first_b);
 	if 	(len == 4 || len == 5)
-		sort_five(first_a, first_b, len);
+	{
+		if (len == 5)
+			push_smallest(first_a, first_b);
+		push_smallest(first_a, first_b);
+		sort_three(first_a, first_b);
+		if (len == 5)
+			moves("pa", first_a, first_b);
+		moves("pa", first_a, first_b);
+	}
 }

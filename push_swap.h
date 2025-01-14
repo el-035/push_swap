@@ -4,7 +4,7 @@
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 # include <stdlib.h>
-#include <stdio.h> //delete
+
 
 typedef struct s_stack
 {
@@ -17,20 +17,17 @@ typedef struct s_stack
     struct s_stack	*next;
 }					t_stack;
 
-//TO DELETE
-void test_print_combined(t_stack *stack_a, t_stack *stack_b);
-
 //main
 t_stack	*allocate_stack_a(char **input);
+void	initialise_position(t_stack **first);
+void	ss_size(t_stack **first);
+t_stack	*check_input(char **arg);
 
 //utils
 void	check_duplicates(char **input, int flag);
 int		atoi_ps(const char *str, char **input);
 int		is_sorted(t_stack *first);
-int		is_rev_sorted(t_stack *first);
 int		ft_strcmp(char *s1, char *s2);
-
-//more
 int		find_max(t_stack *first);
 
 //struct_utils
@@ -53,25 +50,20 @@ void	r(char *move, t_stack **first_a, t_stack **first_b);
 void	rr(char *move, t_stack **first_a, t_stack **first_b);
 void	moves(char *move, t_stack **first_a, t_stack **first_b);
 
-//algorithm
-t_stack	*algorithm(t_stack **first_a, t_stack **first_b);
-int		biggest(t_stack	*first);
-int	    up_down(t_stack *first);
-void	push_biggest_a(t_stack **first_a, t_stack **first_b);
-void	order_b(t_stack **first_a, t_stack **first_b);
-
 //lest sort
 int	    biggest_ss(t_stack *first_a, int smallest);
 void	initialise_ss(t_stack **first);
-void	lets_sort(t_stack **first_a, t_stack **first_b);
 int	    next_small(t_stack *first, int biggest);
-void	initialise_position(t_stack **first);
 void	back_to_a(t_stack **first_a, t_stack **first_b);
 void	half_sort_b(t_stack **first_a, t_stack **first_b);
+int	    up_or_down(t_stack *first, int pos);
+int	    find_pos(t_stack *first, int ss);
 
 //three five
-void    three_five(t_stack **first_a, t_stack **first_b);
 void	sort_three(t_stack **first_a, t_stack **first_b);
+void    three_five(t_stack **first_a, t_stack **first_b);
+void	push_smallest(t_stack **first_a, t_stack **first_b);
+int		biggest(t_stack	*first);
 
 //error + free
 void	error(t_stack **first_a, t_stack **first_b, char **input);
