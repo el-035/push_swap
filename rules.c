@@ -41,7 +41,7 @@ void	push(t_stack **from, t_stack **to)
 		error(from, to, NULL);
 	temp = *from;
 	if (!(*from)->next)
-		return (*from = NULL, free_stack(from));
+		return (free_stack(from));
 	(*from) = (*from)->next;
 	(*from)->previous = temp->previous;
 	temp->previous->next = (*from);
@@ -51,7 +51,6 @@ void	push(t_stack **from, t_stack **to)
 		(*from)->previous = NULL;
 	}
 	free(temp);
-	temp = NULL;
 }
 
 t_stack	*rotate(t_stack *first)
