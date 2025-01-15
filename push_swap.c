@@ -19,10 +19,10 @@ t_stack	*allocate_stack_a(char **input)
 	int		i;
 
 	i = 0;
-	first = new(atoi_ps(input[i++], 0), 'a', 0);
+	first = new(atoi_ps(input[i++], 0), 'a', 0, input);
 	if (!first)
 		error(NULL, NULL, NULL);
-	stack = new_last(first, atoi_ps(input[i++], 0), 'a');
+	stack = new_last(first, atoi_ps(input[i++], 0), 'a', input);
 	if (!stack)
 		error(&first, NULL, NULL);
 	first->size = 1;
@@ -30,7 +30,7 @@ t_stack	*allocate_stack_a(char **input)
 	stack->size = 1;
 	while (input[i])
 	{
-		stack->next = new_last(stack, atoi_ps(input[i++], 0), 'a');
+		stack->next = new_last(stack, atoi_ps(input[i++], 0), 'a', input);
 		if (!stack->next)
 			error(&stack, NULL, NULL);
 		stack->next->size = 1;

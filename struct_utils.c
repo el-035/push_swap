@@ -12,13 +12,13 @@
 
 #include "push_swap.h"
 
-t_stack	*new(int data, char stack, int sub_stack)
+t_stack	*new(int data, char stack, int sub_stack, char **input)
 {
 	t_stack	*new;
 
 	new = (t_stack *) malloc(sizeof(t_stack));
 	if (!new)
-		return (error(NULL, NULL, NULL), NULL);
+		return (error(NULL, NULL, input), NULL);
 	new->data = data;
 	new->stack = stack;
 	new->sub_stack = sub_stack;
@@ -26,14 +26,27 @@ t_stack	*new(int data, char stack, int sub_stack)
 	new->next = NULL;
 	return (new);
 }
+t_stack	*new_not_free(t_stack *from)
+{
+	t_stack	*new;
 
-t_stack	*new_last(t_stack *prev, int data, char stack)
+	new = (t_stack *) malloc(sizeof(t_stack));
+	if (!new)
+		return (error(&from, NULL, NULL), NULL);
+	new->data = from->data;
+	new->stack = from->stack;
+	new->sub_stack = from->sub_stack;
+	new->previous = NULL;
+	new->next = NULL;
+	return (new);
+}
+t_stack	*new_last(t_stack *prev, int data, char stack, char **input)
 {
 	t_stack	*last;
 
 	last = (t_stack *) malloc(sizeof(t_stack));
 	if (!last)
-		return (error(&prev, NULL, NULL), NULL);
+		return (error(&prev, NULL, input), NULL);
 	last->data = data;
 	last->stack = stack;
 	last->previous = prev;
@@ -41,18 +54,16 @@ t_stack	*new_last(t_stack *prev, int data, char stack)
 	return (last);
 }
 
-t_stack	*new_first(t_stack **first, int data, char stack, int sub_stack)
+t_stack	*new_first(t_stack **first, t_stack **from)
 {
 	t_stack	*add;
 
-	if (!*first)
-		return (new(data, stack, sub_stack));
 	add = (t_stack *) malloc(sizeof(t_stack));
 	if (!add)
-		return (error(first, NULL, NULL), NULL);
-	add->data = data;
-	add->stack = stack;
-	add->sub_stack = sub_stack;
+		return (error(first, from, NULL), NULL);
+	add->data = (*from)->data;
+	add->stack = (*from)->stack;
+	add->sub_stack = (*from)->sub_stack;
 	if (*first && !(*first)->next)
 	{
 		add->previous = (*first);
@@ -90,19 +101,4 @@ int	stack_len(t_stack *first)
 	return (nodes);
 }
 
-int	find_smallest(t_stack *first)
-{
-	int	smallest;
-	int	start;
 
-	start = first->data;
-	smallest = first->data;
-	first = first->next;
-	while (first->data != start)
-	{
-		if (first->data < smallest)
-			smallest = first->data;
-		first = first->next;
-	}
-	return (smallest);
-}

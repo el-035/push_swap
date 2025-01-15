@@ -28,15 +28,14 @@ void	swap(t_stack *first)
 
 void	push(t_stack **from, t_stack **to)
 {
-	char	stack;
 	t_stack	*temp;
-
-	stack = 'a';
+	
 	if (!from || !*from)
 		return ;
-	if ((*from)->stack == 'a')
-		stack = 'b';
-	*to = new_first(to, (*from)->data, stack, (*from)->sub_stack);
+	if (!*to)
+		*to = new_not_free(*from);
+	else
+		*to = new_first(to, from);
 	if (!*to)
 		error(from, to, NULL);
 	temp = *from;

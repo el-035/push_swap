@@ -63,3 +63,20 @@ int	top_bottom(t_stack *first, int target)
 		return (2);
 	return (0);
 }
+
+int	find_smallest(t_stack *first)
+{
+	int	smallest;
+	int	start;
+
+	start = first->data;
+	smallest = first->data;
+	first = first->next;
+	while (first->data != start)
+	{
+		if (first->data < smallest)
+			smallest = first->data;
+		first = first->next;
+	}
+	return (smallest);
+}
