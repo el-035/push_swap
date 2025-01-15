@@ -29,7 +29,7 @@ void	swap(t_stack *first)
 void	push(t_stack **from, t_stack **to)
 {
 	t_stack	*temp;
-	
+
 	if (!from || !*from)
 		return ;
 	if (!*to)

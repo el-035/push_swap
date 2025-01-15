@@ -26,6 +26,7 @@ t_stack	*new(int data, char stack, int sub_stack, char **input)
 	new->next = NULL;
 	return (new);
 }
+
 t_stack	*new_not_free(t_stack *from)
 {
 	t_stack	*new;
@@ -40,6 +41,7 @@ t_stack	*new_not_free(t_stack *from)
 	new->next = NULL;
 	return (new);
 }
+
 t_stack	*new_last(t_stack *prev, int data, char stack, char **input)
 {
 	t_stack	*last;
@@ -100,5 +102,3 @@ int	stack_len(t_stack *first)
 	}
 	return (nodes);
 }
-
-

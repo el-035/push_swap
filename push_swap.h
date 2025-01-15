@@ -29,7 +29,7 @@ typedef struct s_stack
 }					t_stack;
 
 //main
-t_stack	*allocate_stack_a(char **input);
+t_stack	*allocate_stack_a(char **input, int flag);
 void	initialise_position(t_stack **first);
 void	ss_size(t_stack **first);
 t_stack	*check_input(char **arg);

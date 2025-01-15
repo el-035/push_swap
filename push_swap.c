@@ -12,25 +12,23 @@
 
 #include "push_swap.h"
 
-t_stack	*allocate_stack_a(char **input)
+t_stack	*allocate_stack_a(char **input, int flag)
 {
 	t_stack	*first;
 	t_stack	*stack;
 	int		i;
+	char	**temp;
 
 	i = 0;
-	first = new(atoi_ps(input[i++], 0), 'a', 0, input);
-	if (!first)
-		error(NULL, NULL, NULL);
-	stack = new_last(first, atoi_ps(input[i++], 0), 'a', input);
-	if (!stack)
-		error(&first, NULL, NULL);
+	temp = NULL;
+	if (flag == 1)
+		temp = input;
+	first = new(atoi_ps(input[i++], 0), 'a', 0, temp);
 	first->size = 1;
-	first->next = stack;
-	stack->size = 1;
+	stack = first;
 	while (input[i])
 	{
-		stack->next = new_last(stack, atoi_ps(input[i++], 0), 'a', input);
+		stack->next = new_last(stack, atoi_ps(input[i++], 0), 'a', temp);
 		if (!stack->next)
 			error(&stack, NULL, NULL);
 		stack->next->size = 1;
@@ -98,21 +96,21 @@ t_stack	*check_input(char **arg)
 	{
 		input = ft_split(arg[1], ' ');
 		if (!input)
-			return (error(NULL, NULL, NULL), NULL);
+			return (error(NULL, NULL, input), NULL);
 		flag = 1;
 	}
 	else
 		input = arg + 1;
+	if (!input[0] && flag == 1)
+		return (free_input(input), NULL);
 	check_duplicates(input, flag);
 	if (!input[1])
 		return (free_input(input), NULL);
-	first_a = allocate_stack_a(input);
+	first_a = allocate_stack_a(input, flag);
 	if (flag == 1)
 		free_input(input);
 	return (first_a);
 }
-
-//check all mallocs
 
 int	main(int argc, char **argv)
 {
