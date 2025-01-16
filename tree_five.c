@@ -14,8 +14,6 @@
 
 void	sort_three(t_stack **first_a, t_stack **first_b)
 {
-	if (is_sorted(*first_a))
-		return ;
 	if (biggest(*first_a) == 3)
 		moves("sa", first_a, first_b);
 	else if (biggest(*first_a) == 2 && (*first_a)->data < \
@@ -92,9 +90,7 @@ void	three_five(t_stack **first_a, t_stack **first_b)
 	int	len;
 
 	len = stack_len(*first_a);
-	if (is_sorted(*first_a) == 1)
-		return ;
-	else if (len == 2 && is_sorted(*first_a) == 0)
+	if (len == 2)
 		moves("sa", first_a, first_b);
 	else if (len == 3)
 		sort_three(first_a, first_b);

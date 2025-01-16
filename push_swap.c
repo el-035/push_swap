@@ -90,8 +90,6 @@ t_stack	*check_input(char **arg)
 	int		flag;
 
 	flag = 0;
-	if (!arg[1])
-		return (NULL);
 	if (!arg[2])
 	{
 		input = ft_split(arg[1], ' ');
