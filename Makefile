@@ -13,8 +13,9 @@ OFILES = $(CFILES:.c=.o)
 
 FT_PRINTF_OFILES = $(FT_PRINTF_FILES:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g -ggdb
+CFLAGS = -Wall -Wextra -Werror
 
+# -I stands for including this specific directory and its header file
 FT_PRINTF = -I./ft_printf
 
 NAME = push_swap
